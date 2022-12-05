@@ -1,0 +1,66 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/material.dart';
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final color_Theme = Color.fromARGB(27, 24, 43, 255);
+    final color_Transparent = Colors.transparent;
+
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+        child: Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              Center(
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: color_Transparent,
+                  backgroundImage: AssetImage("images/man.png"),
+                ),
+              ),
+              Container(
+                child: Row(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: color_Theme,
+                      child: IconButton(
+                        onPressed: () => {},
+                        icon: Image.asset("images/notification.webp"),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: color_Theme,
+                      child: IconButton(
+                        onPressed: () => {},
+                        icon: Image.asset(
+                          "images/menu.webp",
+                        ),
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(110);
+}
