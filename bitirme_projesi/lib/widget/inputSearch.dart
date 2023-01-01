@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class inputSearch extends StatelessWidget {
   const inputSearch({
     Key? key,
-    required this.width,
   }) : super(key: key);
-
-  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +11,7 @@ class inputSearch extends StatelessWidget {
     final color_Transparent = Colors.transparent;
     final inputText = 'Search';
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),

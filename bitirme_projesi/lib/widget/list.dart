@@ -6,7 +6,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 
 class Listeleme extends StatelessWidget {
-  final listLocation = Travel.generateLocation();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -16,8 +15,9 @@ class Listeleme extends StatelessWidget {
       width: width * 0.9,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: listLocation.length,
-        itemBuilder: ((context, index) => Locations(listLocation[index])),
+        itemCount: locationList.travel.length,
+        itemBuilder: ((context, index) =>
+            Locations(locationList.travel[index])),
         separatorBuilder: (BuildContext context, int index) => SizedBox(
           width: 15,
         ),

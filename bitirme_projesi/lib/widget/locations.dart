@@ -18,7 +18,6 @@ class Locations extends StatelessWidget {
     final double circleYukseklik = 50;
 
     final double top = containerHeight - circleYukseklik / 2;
-    final listLocation = Travel.generateLocation();
 
     return LayoutBuilder(
       builder: (context, contraints) => Container(

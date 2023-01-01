@@ -1,4 +1,6 @@
 import 'package:bitirme_projesi/screen/homepage.dart';
+import 'package:bitirme_projesi/screen/logoScreen.dart';
+import 'package:bitirme_projesi/screen/registerScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,14 +14,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Travel App',
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         /* dark theme settings */
       ),
+      routes: {
+        '/homeScreen': (context) => HomePage(),
+        '/registerScreen': (context) => RegisterScreen(),
+      },
       themeMode: ThemeMode.dark,
-      home: HomePage(),
+      // theme: ThemeData.dark(),
+
+      home: LogoScreen(),
     );
   }
 }

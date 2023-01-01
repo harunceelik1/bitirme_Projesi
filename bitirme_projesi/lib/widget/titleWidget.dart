@@ -3,17 +3,14 @@ import 'package:flutter/material.dart';
 class titleWidget extends StatelessWidget {
   const titleWidget({
     Key? key,
-    required this.width,
-    required this.title,
   }) : super(key: key);
-
-  final double width;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
+    final title = "Where do you want to be ?";
     final color_Theme = Color.fromARGB(27, 24, 43, 255);
     final color_Transparent = Colors.transparent;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: LayoutBuilder(

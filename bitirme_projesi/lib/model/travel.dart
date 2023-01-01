@@ -9,15 +9,13 @@ class Travel {
   String type;
 
   Travel(this.image, this.name, this.rate, this.icon, this.location, this.type);
+}
 
-  static List<Travel> generateLocation() {
-    return [
-      Travel(
-          'images/mosque.jpg', 'Mosquse', "4.9", Icons.flag, 'Mısırsa', 'Camp'),
-      Travel('images/lhasa.jpg', 'Mosquse', "4.9", Icons.flag, 'Türkiya',
-          'Mountain'),
-      Travel('images/mosque.jpg', 'Mosquse', "4.9", Icons.flag, 'Mısırsa',
-          'Beach'),
-    ];
-  }
+class locationList {
+  static final List<Travel> travel = [
+    Travel('images/mosque.jpg', 'Mosquse', "4.9", Icons.flag, 'Mısır', 'Camp'),
+    Travel('images/yerebatan-sarnici2.jpg', 'Mosquse', "4.9", Icons.flag,
+        'Mısır', 'Camp'),
+    Travel('images/mosque.jpg', 'Mosquse', "4.9", Icons.flag, 'Mısır', 'Camp'),
+  ];
 }

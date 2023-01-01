@@ -11,11 +11,11 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
-  final categoriesList = [
-    'Beach',
-    'Camp',
-    'Mountain',
-    'Forest',
+  List<Map<String, dynamic>> categoriesList = [
+    {"id": 'Beach'},
+    {"id": 'Camp'},
+    {"id": 'Mountain'},
+    {"id": 'Beach'},
   ];
   int selectItem = 0;
   @override
@@ -47,7 +47,7 @@ class _CategoriesState extends State<Categories> {
                         width: 90,
                         child: Center(
                           child: Text(
-                            categoriesList[index],
+                            categoriesList[index]["id"],
                             style: selectItem == index
                                 ? TextStyle(color: Colors.white, fontSize: 15)
                                 : TextStyle(color: Colors.grey.shade700),
