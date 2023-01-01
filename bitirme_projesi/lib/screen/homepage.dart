@@ -34,30 +34,31 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
         appBar: CustomAppBar(),
-        body: Column(
-          children: [
-            /// Başlık Yazı Kısmı
-            Expanded(flex: 1, child: titleWidget()),
+        body: LayoutBuilder(
+            builder: (context, constraints) => Column(
+                  children: [
+                    // Başlık Yazı Kısmı
+                    Expanded(flex: 1, child: titleWidget()),
 
-            /// İnputDecoration - Arama Kısmı
-            SizedBox(
-              height: 5,
-            ),
-            // FractionallySizedBox(
-            //   heightFactor: 0,
-            // ),
-            Expanded(flex: 1, child: inputSearch()),
-            SizedBox(
-              height: 15,
-            ),
-            // Kategoriler kısmı. Listview ile yapıldı
-            Flexible(flex: 1, child: Categories()),
-            SizedBox(
-              height: 15,
-            ),
-            Expanded(flex: 7, child: Listeleme()),
-          ],
-        ),
+                    /// İnputDecoration - Arama Kısmı
+                    SizedBox(
+                      height: 5,
+                    ),
+                    // FractionallySizedBox(
+                    //   heightFactor: 0,
+                    // ),
+                    Expanded(flex: 1, child: inputSearch()),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    // Kategoriler kısmı. Listview ile yapıldı
+                    Flexible(flex: 1, child: Categories()),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Expanded(flex: 7, child: Listeleme()),
+                  ],
+                )),
         // body: SafeArea(
         //   child: CustomScrollView(
         //     slivers: [
