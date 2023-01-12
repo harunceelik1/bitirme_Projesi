@@ -1,8 +1,6 @@
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/widget/locations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 
 class Listeleme extends StatelessWidget {
@@ -13,6 +11,8 @@ class Listeleme extends StatelessWidget {
 
     return Container(
       width: width * 0.9,
+      height: 325,
+      // color: Colors.red,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: locationList.travel.length,

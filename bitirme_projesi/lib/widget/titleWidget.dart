@@ -25,13 +25,15 @@ class titleWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.subtitle2?.copyWith(
                     color: Colors.grey.shade500, fontWeight: FontWeight.w200),
               ),
-              Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    ?.copyWith(fontWeight: FontWeight.w400),
-              )
+              Wrap(children: [
+                Text(
+                  title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      ?.copyWith(fontWeight: FontWeight.w400),
+                ),
+              ])
             ],
           ),
         ),

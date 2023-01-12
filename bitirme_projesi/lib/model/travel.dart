@@ -16,6 +16,6 @@ class locationList {
     Travel('images/mosque.jpg', 'Mosquse', "4.9", Icons.flag, 'Mısır', 'Camp'),
     Travel('images/yerebatan-sarnici2.jpg', 'Mosquse', "4.9", Icons.flag,
         'Mısır', 'Camp'),
-    Travel('images/mosque.jpg', 'Mosquse', "4.9", Icons.flag, 'Mısır', 'Camp'),
+    Travel('images/lhasa.jpg', 'Hasa', "4.9", Icons.flag, 'Mısır', 'Camp'),
   ];
 }

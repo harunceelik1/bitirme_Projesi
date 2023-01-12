@@ -26,7 +26,7 @@ class Locations extends StatelessWidget {
           // alignment: Alignment.bottomRight,
           children: [
             Container(
-              height: 600 / 2,
+              height: 310,
               width: width * 0.8,
               decoration: BoxDecoration(
                   color: color_Theme, borderRadius: BorderRadius.circular(20)),
