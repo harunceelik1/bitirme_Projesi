@@ -20,7 +20,7 @@ class _LogoScreenState extends State<LogoScreen> {
   }
 
   startTimer() async {
-    var duration = DurationEnum.LOW.time;
+    var duration = DurationEnum.NORMAL.time;
     return new Timer(duration, loginRoute);
   }
 

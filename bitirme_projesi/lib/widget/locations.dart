@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:bitirme_projesi/model/travel.dart';
+import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:flutter/material.dart';
 
 class Locations extends StatelessWidget {
@@ -35,14 +36,25 @@ class Locations extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: InkWell(
-                      onTap: (() => {}),
-                      child: Container(
-                          height: 200,
-                          decoration: BoxDecoration(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => HeroScreen(
+                                      travel: travel,
+                                    ))));
+                      },
+                      child: Hero(
+                        tag: travel.image,
+                        child: Container(
+                            height: 200,
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               image: new DecorationImage(
                                   image: AssetImage(travel.image),
-                                  fit: BoxFit.cover))),
+                                  fit: BoxFit.cover),
+                            )),
+                      ),
                     ),
                   ),
                   Padding(

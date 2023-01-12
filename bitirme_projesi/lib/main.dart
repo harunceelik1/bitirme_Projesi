@@ -1,3 +1,4 @@
+import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:bitirme_projesi/screen/logoScreen.dart';
 import 'package:bitirme_projesi/screen/registerScreen.dart';
@@ -26,8 +27,7 @@ class MyApp extends StatelessWidget {
       },
       themeMode: ThemeMode.dark,
       // theme: ThemeData.dark(),
-
-      home: LogoScreen(),
+      home: HomePage(),
     );
   }
 }

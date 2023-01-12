@@ -14,6 +14,7 @@ class Listeleme extends StatelessWidget {
       height: 325,
       // color: Colors.red,
       child: ListView.separated(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: locationList.travel.length,
         itemBuilder: ((context, index) =>
