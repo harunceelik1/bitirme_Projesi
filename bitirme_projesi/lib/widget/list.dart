@@ -9,6 +9,8 @@ class Listeleme extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
+    // print(locationList.travel[1].type);
+
     return Container(
       width: width * 0.9,
       height: 325,

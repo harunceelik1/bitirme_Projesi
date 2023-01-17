@@ -16,7 +16,7 @@ class _LogoScreenState extends State<LogoScreen> {
   @override
   void initState() {
     super.initState();
-    startTimer();
+    // startTimer();
   }
 
   startTimer() async {
@@ -44,7 +44,17 @@ class _LogoScreenState extends State<LogoScreen> {
               ),
             ),
           ),
-          Center(child: FlutterLogo())
+          Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Welcome", style: Theme.of(context).textTheme.headline3),
+              SizedBox(
+                height: 10,
+              ),
+              FlutterLogo()
+            ],
+          ))
         ],
       ),
     );

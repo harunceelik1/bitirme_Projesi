@@ -16,6 +16,7 @@ class _CategoriesState extends State<Categories> {
     {"id": 'Camp'},
     {"id": 'Mountain'},
     {"id": 'Beach'},
+    {"id": 'History'},
   ];
   int selectItem = 0;
   @override
@@ -24,11 +25,13 @@ class _CategoriesState extends State<Categories> {
     final width = MediaQuery.of(context).size.width;
     final color_Theme = Color.fromARGB(27, 24, 43, 255);
     final color_Transparent = Colors.transparent;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
         height: 50,
         child: ListView.separated(
+            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) => GestureDetector(
