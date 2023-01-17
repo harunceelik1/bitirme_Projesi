@@ -1,8 +1,9 @@
-import 'dart:developer';
-
 import 'package:bitirme_projesi/model/travel.dart';
-import 'package:bitirme_projesi/widget/locations.dart';
+import 'package:bitirme_projesi/screen/heroScreen.dart';
+import 'package:bitirme_projesi/widget/list.dart';
 import 'package:flutter/material.dart';
+
+import 'locations.dart';
 
 class inputSearch extends StatefulWidget {
   const inputSearch({
@@ -13,26 +14,7 @@ class inputSearch extends StatefulWidget {
   State<inputSearch> createState() => _inputSearchState();
 }
 
-List<Travel> searchList = [];
-
 class _inputSearchState extends State<inputSearch> {
-  var deneme = travel;
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      searchList = deneme;
-    });
-  }
-
-  onSearch(String search) {
-    setState(() {
-      searchList = deneme
-          .where((element) => element.name.toLowerCase().contains(search))
-          .toList();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final color_Theme = Color.fromARGB(27, 24, 43, 255);
@@ -40,6 +22,15 @@ class _inputSearchState extends State<inputSearch> {
     final inputText = 'Search';
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    void updateList(String value) {
+      setState(() {
+        display_list = travel
+            .where((element) =>
+                element.name.toLowerCase().contains(value.toLowerCase()))
+            .toList();
+      });
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -50,12 +41,11 @@ class _inputSearchState extends State<inputSearch> {
             flex: 6,
             child: Container(
               width: width * 0.8,
-              child: TextFormField(
-                onChanged: ((value) {
-                  log(value);
-                  log(searchList.length.toString());
-                  onSearch(value);
-                }),
+              child: TextField(
+                onChanged: (value) => setState(() {
+                  return updateList(value);
+                }) //değer atadığımız yer,
+                ,
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(2),
                     hintText: inputText,
@@ -101,9 +91,6 @@ class _inputSearchState extends State<inputSearch> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
             ),
-          ),
-          SizedBox(
-            height: 50,
           ),
         ],
       ),

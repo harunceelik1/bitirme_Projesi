@@ -19,19 +19,18 @@ class _ListelemeState extends State<Listeleme> {
     // print(locationList.travel[1].type);
 
     return Container(
-        width: width * 0.9,
-        height: 325,
-        // color: Colors.red,
-        child: searchList.length > 0
-            ? ListView.separated(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: searchList.length,
-                itemBuilder: ((context, index) => Locations(searchList[index])),
-                separatorBuilder: (BuildContext context, int index) => SizedBox(
-                  width: 15,
-                ),
-              )
-            : Text("Boş"));
+      width: width * 0.9,
+      height: 325,
+      // color: Colors.red,
+      child: ListView.separated(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: display_list.length,
+        itemBuilder: ((context, index) => Locations(display_list[index])),
+        separatorBuilder: (BuildContext context, int index) => SizedBox(
+          width: 15,
+        ),
+      ),
+    );
   }
 }

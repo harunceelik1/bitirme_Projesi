@@ -27,7 +27,19 @@ class mobileScreen extends StatelessWidget {
         SizedBox(
           height: 15,
         ),
-        Listeleme(),
+        display_list.length == 0
+            ? Center(
+                heightFactor: 10,
+                child: Text(
+                  "Bulunamadı",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            : Listeleme(),
       ],
     );
   }
