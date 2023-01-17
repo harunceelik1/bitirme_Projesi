@@ -21,48 +21,47 @@ class Travel {
       required this.price});
 }
 
-class locationList {
-  static final List<Travel> travel = [
-    Travel(
-      image: 'images/mosque.jpg',
-      name: 'II. Hasan Mosque',
-      rate: "4.9",
-      icon: Icons.flag,
-      location: 'Fas',
-      type: 'History',
-      descp:
-          'Açıklama gelmesi gerekiyor bu kısıma.Açıklama gelmesi gerekiyor bu kısıma.Açıklama gelmesi gerekiyor bu kısıma.',
-      price: '\$ 410',
-    ),
-    Travel(
-      image: 'images/turk_caicos_ada.jpg',
-      name: 'Grace Bay',
-      rate: "5",
-      icon: Icons.flag,
-      location: 'Turks and Caicos Island',
-      type: 'Beach',
-      descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
-      price: '\$ 340',
-    ),
-    Travel(
-      image: 'images/lhasa.jpg',
-      name: 'LHasa',
-      rate: "4.7",
-      icon: Icons.flag,
-      location: 'China',
-      type: 'History',
-      descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
-      price: '\$ 510',
-    ),
-    Travel(
-      image: 'images/yerebatan-sarnici2.jpg',
-      name: 'Yerebatan Sarnıcı',
-      rate: "4.5",
-      icon: Icons.flag,
-      location: 'Türkiye',
-      type: 'History',
-      descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
-      price: '\$ 560',
-    ),
-  ];
-}
+String text = "";
+List<Travel> travel = [
+  Travel(
+    image: 'images/mosque.jpg',
+    name: 'II. Hasan Mosque',
+    rate: "4.9",
+    icon: Icons.flag,
+    location: 'Fas',
+    type: 'History',
+    descp:
+        'Açıklama gelmesi gerekiyor bu kısıma.Açıklama gelmesi gerekiyor bu kısıma.Açıklama gelmesi gerekiyor bu kısıma.',
+    price: '\$ 410',
+  ),
+  Travel(
+    image: 'images/turk_caicos_ada.jpg',
+    name: 'Grace Bay',
+    rate: "5",
+    icon: Icons.flag,
+    location: 'Turks and Caicos Island',
+    type: 'Beach',
+    descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
+    price: '\$ 340',
+  ),
+  Travel(
+    image: 'images/lhasa.jpg',
+    name: 'LHasa',
+    rate: "4.7",
+    icon: Icons.flag,
+    location: 'China',
+    type: 'History',
+    descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
+    price: '\$ 510',
+  ),
+  Travel(
+    image: 'images/yerebatan-sarnici2.jpg',
+    name: 'Yerebatan Sarnıcı',
+    rate: "4.5",
+    icon: Icons.flag,
+    location: 'Türkiye',
+    type: 'History',
+    descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
+    price: '\$ 560',
+  ),
+];

@@ -38,7 +38,10 @@ class _LogoScreenState extends State<LogoScreen> {
             decoration: BoxDecoration(
               color: new Color(0xff1f3b83),
               gradient: LinearGradient(
-                colors: [(new Color(0xff1f3b83)), new Color(0xff058cc0)],
+                colors: [
+                  (Color.fromARGB(255, 52, 112, 161)),
+                  new Color(0xff1d71b8)
+                ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
@@ -48,7 +51,11 @@ class _LogoScreenState extends State<LogoScreen> {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Welcome", style: Theme.of(context).textTheme.headline3),
+              Text("Welcome",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline3
+                      ?.copyWith(color: Colors.white)),
               SizedBox(
                 height: 10,
               ),

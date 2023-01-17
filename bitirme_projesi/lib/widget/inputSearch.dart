@@ -1,10 +1,16 @@
+import 'package:bitirme_projesi/model/travel.dart';
 import 'package:flutter/material.dart';
 
-class inputSearch extends StatelessWidget {
+class inputSearch extends StatefulWidget {
   const inputSearch({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<inputSearch> createState() => _inputSearchState();
+}
+
+class _inputSearchState extends State<inputSearch> {
   @override
   Widget build(BuildContext context) {
     final color_Theme = Color.fromARGB(27, 24, 43, 255);
@@ -12,6 +18,13 @@ class inputSearch extends StatelessWidget {
     final inputText = 'Search';
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    TextEditingController controller = TextEditingController();
+
+    List<Travel> searchList = travel
+        .where((element) =>
+            element.name.toLowerCase().contains(text.toLowerCase()))
+        .toList();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -22,7 +35,13 @@ class inputSearch extends StatelessWidget {
             flex: 6,
             child: Container(
               width: width * 0.8,
-              child: TextField(
+              child: TextFormField(
+                controller: controller,
+                onFieldSubmitted: (covariant) {
+                  setState(() {
+                    text = covariant;
+                  });
+                },
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(2),
                     hintText: inputText,
