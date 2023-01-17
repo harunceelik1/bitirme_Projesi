@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:bitirme_projesi/model/travel.dart';
+import 'package:bitirme_projesi/widget/locations.dart';
 import 'package:flutter/material.dart';
 
 class inputSearch extends StatefulWidget {
@@ -10,7 +13,26 @@ class inputSearch extends StatefulWidget {
   State<inputSearch> createState() => _inputSearchState();
 }
 
+List<Travel> searchList = [];
+
 class _inputSearchState extends State<inputSearch> {
+  var deneme = travel;
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      searchList = deneme;
+    });
+  }
+
+  onSearch(String search) {
+    setState(() {
+      searchList = deneme
+          .where((element) => element.name.toLowerCase().contains(search))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final color_Theme = Color.fromARGB(27, 24, 43, 255);
@@ -18,13 +40,6 @@ class _inputSearchState extends State<inputSearch> {
     final inputText = 'Search';
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
-    TextEditingController controller = TextEditingController();
-
-    List<Travel> searchList = travel
-        .where((element) =>
-            element.name.toLowerCase().contains(text.toLowerCase()))
-        .toList();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -36,12 +51,11 @@ class _inputSearchState extends State<inputSearch> {
             child: Container(
               width: width * 0.8,
               child: TextFormField(
-                controller: controller,
-                onFieldSubmitted: (covariant) {
-                  setState(() {
-                    text = covariant;
-                  });
-                },
+                onChanged: ((value) {
+                  log(value);
+                  log(searchList.length.toString());
+                  onSearch(value);
+                }),
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(2),
                     hintText: inputText,
@@ -87,6 +101,9 @@ class _inputSearchState extends State<inputSearch> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
             ),
+          ),
+          SizedBox(
+            height: 50,
           ),
         ],
       ),

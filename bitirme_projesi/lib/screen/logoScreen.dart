@@ -16,7 +16,7 @@ class _LogoScreenState extends State<LogoScreen> {
   @override
   void initState() {
     super.initState();
-    // startTimer();
+    startTimer();
   }
 
   startTimer() async {
@@ -40,28 +40,19 @@ class _LogoScreenState extends State<LogoScreen> {
               gradient: LinearGradient(
                 colors: [
                   (Color.fromARGB(255, 52, 112, 161)),
-                  new Color(0xff1d71b8)
+                  Color.fromARGB(255, 23, 32, 39)
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
             ),
           ),
-          Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Welcome",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline3
-                      ?.copyWith(color: Colors.white)),
-              SizedBox(
-                height: 10,
-              ),
-              FlutterLogo()
-            ],
-          ))
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage("images/traworld.png"),
+            )),
+          )
         ],
       ),
     );

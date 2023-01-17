@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       },
       themeMode: ThemeMode.dark,
       // theme: ThemeData.dark(),
-      home: LoginScreen(),
+      home: LogoScreen(),
     );
   }
 }

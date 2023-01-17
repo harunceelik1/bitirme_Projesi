@@ -23,7 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             children: [
               Container(
-                height: 300,
+                height: 330,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(60),
@@ -38,19 +38,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Center(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50.0),
-                      child: Container(
-                        child: Image.asset("images/man.png"),
-                        width: 90,
-                        height: 90,
-                      ),
+                    Container(
+                      child: Image.asset("images/tw.png"),
+                      height: 300,
                     ),
-                    Text(
-                      "Register",
-                      style: TextStyle(fontSize: 16),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Text(
+                        "Register",
+                        style: TextStyle(fontSize: 16),
+                      ),
                     )
                   ],
                 )),
