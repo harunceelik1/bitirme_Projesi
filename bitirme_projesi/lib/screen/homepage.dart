@@ -34,8 +34,14 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: ResponsiveLayout(
               mobileBody: mobileScreen(),
-              desktopBody: Container(),
-              tabletBody: Container()),
+              desktopBody: Container(
+                child: Center(child: Text("Desktop..")),
+              ),
+              tabletBody: Container(
+                child: Center(
+                  child: Text("Tablet.."),
+                ),
+              )),
         ),
         bottomNavigationBar: bottomNavigation(color_Theme: color_Theme));
   }

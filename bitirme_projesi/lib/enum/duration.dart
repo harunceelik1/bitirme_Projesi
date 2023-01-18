@@ -6,7 +6,7 @@ extension DurationEnumEx on DurationEnum {
       case DurationEnum.HIGH:
         return Duration(seconds: 10);
       case DurationEnum.NORMAL:
-        return Duration(seconds: 3);
+        return Duration(seconds: 5);
       case DurationEnum.LOW:
         return Duration(seconds: 1);
       default:
