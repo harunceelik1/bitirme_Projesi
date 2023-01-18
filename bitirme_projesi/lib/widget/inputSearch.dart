@@ -5,16 +5,10 @@ import 'package:flutter/material.dart';
 
 import 'locations.dart';
 
-class inputSearch extends StatefulWidget {
-  const inputSearch({
-    Key? key,
-  }) : super(key: key);
+class InputSearch extends StatelessWidget {
+  final Function filterFunction;
+  const InputSearch(this.filterFunction);
 
-  @override
-  State<inputSearch> createState() => _inputSearchState();
-}
-
-class _inputSearchState extends State<inputSearch> {
   @override
   Widget build(BuildContext context) {
     final color_Theme = Color.fromARGB(27, 24, 43, 255);
@@ -24,12 +18,7 @@ class _inputSearchState extends State<inputSearch> {
     final width = MediaQuery.of(context).size.width;
 
     void updateList(String value) {
-      setState(() {
-        display_list = travel
-            .where((element) =>
-                element.name.toLowerCase().contains(value.toLowerCase()))
-            .toList();
-      });
+      filterFunction(value, true);
     }
 
     return Padding(
@@ -42,10 +31,10 @@ class _inputSearchState extends State<inputSearch> {
             child: Container(
               width: width * 0.8,
               child: TextField(
-                onChanged: (value) => setState(() {
-                  return updateList(value);
-                }) //değer atadığımız yer,
-                ,
+                onChanged: (value) {
+                  updateList(value);
+                }, //değer atadığımız yer,
+
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(2),
                     hintText: inputText,

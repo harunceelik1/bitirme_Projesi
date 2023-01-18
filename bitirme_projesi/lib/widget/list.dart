@@ -6,20 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 List<Travel> display_list = travel;
-String? deneme;
 
-class Listeleme extends StatefulWidget {
-  @override
-  State<Listeleme> createState() => _ListelemeState();
-}
+class Listeleme extends StatelessWidget {
+  final List<Travel> travel;
+  const Listeleme(this.travel);
 
-class _ListelemeState extends State<Listeleme> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     // print(locationList.travel[1].type);
-    print(deneme);
+
+    Locations renderLocations(int index) {
+      return Locations(travel[index]);
+    }
+
     return Container(
       width: width * 0.9,
       height: 325,
@@ -27,8 +28,8 @@ class _ListelemeState extends State<Listeleme> {
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: display_list.length,
-        itemBuilder: ((context, index) => Locations(display_list[index])),
+        itemCount: travel.length,
+        itemBuilder: ((context, index) => renderLocations(index)),
         separatorBuilder: (BuildContext context, int index) => SizedBox(
           width: 15,
         ),

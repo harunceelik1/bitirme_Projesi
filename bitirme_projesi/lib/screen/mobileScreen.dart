@@ -1,13 +1,67 @@
+import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/widget/category.dart';
+import 'dart:developer';
 import 'package:bitirme_projesi/widget/inputSearch.dart';
 import 'package:bitirme_projesi/widget/list.dart';
 import 'package:bitirme_projesi/widget/titleWidget.dart';
 import 'package:flutter/material.dart';
 
-class mobileScreen extends StatelessWidget {
+class mobileScreen extends StatefulWidget {
   const mobileScreen({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<mobileScreen> createState() => _mobileScreenState();
+}
+
+class _mobileScreenState extends State<mobileScreen> {
+  List<Travel> _travelData = travel;
+  String filteredInputText = "";
+  String filteredCategory = "";
+
+  void updateTravelData() {
+    List<Travel> filteredList = [];
+    // print("sa" + filteredInputText);
+    // print(filteredCategory);
+
+    if (filteredInputText == "" && filteredCategory == "") {
+      filteredList = travel;
+    } else if (filteredInputText == "" && filteredCategory != "") {
+      filteredList =
+          travel.where((element) => element.type == filteredCategory).toList();
+    } else if (filteredInputText != "" && filteredCategory == "") {
+      filteredList = travel
+          .where((element) => element.name
+              .toLowerCase()
+              .contains(filteredInputText.toLowerCase()))
+          .toList();
+    } else if (filteredInputText != "" && filteredCategory != "") {
+      filteredList = travel
+          .where((element) => element.name
+              .toLowerCase()
+              .contains(filteredInputText.toLowerCase()))
+          .toList()
+          .where((element) => element.type == filteredCategory)
+          .toList();
+    }
+    setState(() {
+      _travelData = filteredList;
+    });
+  }
+
+  void filterTravel(String text, bool isSearch) {
+    if (isSearch == true) {
+      setState(() {
+        filteredInputText = text;
+      });
+    } else {
+      setState(() {
+        filteredCategory = text;
+      });
+    }
+    updateTravelData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +72,19 @@ class mobileScreen extends StatelessWidget {
         SizedBox(
           height: 35,
         ),
-        inputSearch(),
+        InputSearch(filterTravel),
         SizedBox(
           height: 15,
         ),
         // Kategoriler kısmı. Listview ile yapıldı
-        Categories(),
+        Categories(
+          filterTravel: filterTravel,
+        ),
+
         SizedBox(
           height: 15,
         ),
-        display_list.length == 0
+        _travelData.length == 0
             ? Center(
                 heightFactor: 10,
                 child: Text(
@@ -39,7 +96,7 @@ class mobileScreen extends StatelessWidget {
                   ),
                 ),
               )
-            : Listeleme(),
+            : Listeleme(_travelData),
       ],
     );
   }

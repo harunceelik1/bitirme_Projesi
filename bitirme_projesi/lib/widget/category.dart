@@ -8,7 +8,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 
 class Categories extends StatefulWidget {
-  const Categories({super.key});
+  Function filterTravel;
+  Categories({Key? mykey, required this.filterTravel}) : super(key: mykey);
 
   @override
   State<Categories> createState() => _CategoriesState();
@@ -52,10 +53,9 @@ class _CategoriesState extends State<Categories> {
                     setState(() {
                       selectItem = index;
                       // deneme = categoriesList[index]["id"];
-                      return deneme1(categoriesList[index]["id"]);
-
                       // print(deneme);
                     });
+                    widget.filterTravel(categoriesList[index]["id"], false);
                   },
                   child: Container(
                     child: Card(
