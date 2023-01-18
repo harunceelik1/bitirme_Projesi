@@ -1,10 +1,12 @@
 import 'package:bitirme_projesi/model/travel.dart';
+import 'package:bitirme_projesi/widget/category.dart';
 import 'package:bitirme_projesi/widget/inputSearch.dart';
 import 'package:bitirme_projesi/widget/locations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 List<Travel> display_list = travel;
+String? deneme;
 
 class Listeleme extends StatefulWidget {
   @override
@@ -17,7 +19,7 @@ class _ListelemeState extends State<Listeleme> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     // print(locationList.travel[1].type);
-
+    print(deneme);
     return Container(
       width: width * 0.9,
       height: 325,

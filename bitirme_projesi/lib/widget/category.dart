@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:bitirme_projesi/model/travel.dart';
+import 'package:bitirme_projesi/widget/list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -10,12 +14,13 @@ class Categories extends StatefulWidget {
   State<Categories> createState() => _CategoriesState();
 }
 
+List category1 = [];
+
 class _CategoriesState extends State<Categories> {
   List<Map<String, dynamic>> categoriesList = [
     {"id": 'Beach'},
     {"id": 'Camp'},
     {"id": 'Mountain'},
-    {"id": 'Beach'},
     {"id": 'History'},
   ];
   int selectItem = 0;
@@ -25,6 +30,14 @@ class _CategoriesState extends State<Categories> {
     final width = MediaQuery.of(context).size.width;
     final color_Theme = Color.fromARGB(27, 24, 43, 255);
     final color_Transparent = Colors.transparent;
+
+    void deneme1(String value) {
+      setState(() {
+        display_list =
+            travel.where((element) => element.type == value).toList();
+        print(value);
+      });
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -38,6 +51,10 @@ class _CategoriesState extends State<Categories> {
                   onTap: () {
                     setState(() {
                       selectItem = index;
+                      // deneme = categoriesList[index]["id"];
+                      return deneme1(categoriesList[index]["id"]);
+
+                      // print(deneme);
                     });
                   },
                   child: Container(

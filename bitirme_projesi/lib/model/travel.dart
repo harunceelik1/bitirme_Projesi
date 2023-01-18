@@ -50,7 +50,7 @@ List<Travel> travel = [
     rate: "4.7",
     icon: Icons.flag,
     location: 'China',
-    type: 'History',
+    type: 'Camp',
     descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
     price: '\$ 510',
   ),
