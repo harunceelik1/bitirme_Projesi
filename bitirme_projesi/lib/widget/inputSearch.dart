@@ -1,3 +1,4 @@
+import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:bitirme_projesi/widget/list.dart';
@@ -11,8 +12,6 @@ class InputSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color_Theme = Color.fromARGB(27, 24, 43, 255);
-    final color_Transparent = Colors.transparent;
     final inputText = 'Search';
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -43,7 +42,7 @@ class InputSearch extends StatelessWidget {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none),
-                    fillColor: color_Theme,
+                    fillColor: screenColor.cardsColor,
                     filled: true,
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -70,7 +69,7 @@ class InputSearch extends StatelessWidget {
             child: Card(
               color: Color.fromARGB(90, 72, 87, 250),
               child: CircleAvatar(
-                backgroundColor: color_Transparent,
+                backgroundColor: screenColor.transparent,
                 radius: 25,
                 child: Icon(
                   Icons.location_pin,

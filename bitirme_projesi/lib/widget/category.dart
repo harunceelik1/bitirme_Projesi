@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/widget/list.dart';
 import 'package:flutter/material.dart';
@@ -29,16 +30,6 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final color_Theme = Color.fromARGB(27, 24, 43, 255);
-    final color_Transparent = Colors.transparent;
-
-    void deneme1(String value) {
-      setState(() {
-        display_list =
-            travel.where((element) => element.type == value).toList();
-        print(value);
-      });
-    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -60,8 +51,8 @@ class _CategoriesState extends State<Categories> {
                   child: Container(
                     child: Card(
                       color: selectItem == index
-                          ? Color.fromARGB(255, 52, 112, 161)
-                          : color_Theme,
+                          ? screenColor.themeColor
+                          : screenColor.unselectColor,
                       // ignore: sort_child_properties_last
                       child: SizedBox(
                         width: 90,
@@ -69,7 +60,8 @@ class _CategoriesState extends State<Categories> {
                           child: Text(
                             categoriesList[index]["id"],
                             style: selectItem == index
-                                ? TextStyle(color: Colors.white, fontSize: 15)
+                                ? TextStyle(
+                                    color: screenColor.white, fontSize: 15)
                                 : TextStyle(color: Colors.grey.shade700),
                           ),
                         ),

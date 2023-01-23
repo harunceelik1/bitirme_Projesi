@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -7,9 +8,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color_Theme = Color.fromARGB(27, 24, 43, 255);
-    final color_Transparent = Colors.transparent;
-
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -21,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Center(
                 child: CircleAvatar(
                   radius: 25,
-                  backgroundColor: color_Transparent,
+                  backgroundColor: screenColor.transparent,
                   backgroundImage: AssetImage("images/man.png"),
                 ),
               ),
@@ -31,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundColor: color_Theme,
+                      backgroundColor: screenColor.cardsColor,
                       child: IconButton(
                         onPressed: () => {},
                         icon: Image.asset("images/notification.webp"),
@@ -42,13 +40,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     CircleAvatar(
                       radius: 25,
-                      backgroundColor: color_Theme,
+                      backgroundColor: screenColor.cardsColor,
                       child: IconButton(
                         onPressed: () => {},
                         icon: Image.asset(
                           "images/menu.webp",
                         ),
-                        color: Colors.white,
+                        color: screenColor.white,
                       ),
                     ),
                   ],

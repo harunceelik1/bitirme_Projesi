@@ -24,7 +24,6 @@ class _mobileScreenState extends State<mobileScreen> {
     List<Travel> filteredList = [];
     // print("sa" + filteredInputText);
     // print(filteredCategory);
-
     if (filteredInputText == "" && filteredCategory == "") {
       filteredList = travel;
     } else if (filteredInputText == "" && filteredCategory != "") {

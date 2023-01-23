@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,6 @@ class _HeroScreenState extends State<HeroScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    final color_Theme = Color.fromARGB(255, 52, 112, 161);
     String text;
 
     var height = MediaQuery.of(context).size.height;
@@ -69,7 +69,7 @@ class _HeroScreenState extends State<HeroScreen> {
                                                     HomePage())))
                                       },
                                       icon: Icon(Icons.arrow_back),
-                                      color: Colors.white,
+                                      color: screenColor.white,
                                     ),
                                   ),
                                   decoration: BoxDecoration(
@@ -77,8 +77,8 @@ class _HeroScreenState extends State<HeroScreen> {
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
                                         colors: [
-                                          Colors.white.withOpacity(0.6),
-                                          Colors.white.withOpacity(0.1),
+                                          screenColor.white.withOpacity(0.6),
+                                          screenColor.white.withOpacity(0.1),
                                         ]),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -94,7 +94,7 @@ class _HeroScreenState extends State<HeroScreen> {
                     child: Container(
                       alignment: Alignment.topRight,
                       child: Material(
-                        color: Colors.transparent,
+                        color: screenColor.transparent,
                         child: ClipRRect(
                             child: BackdropFilter(
                                 filter: ImageFilter.blur(
@@ -104,13 +104,13 @@ class _HeroScreenState extends State<HeroScreen> {
                                 child: Container(
                                   child: CircleAvatar(
                                     radius: 25,
-                                    backgroundColor: Colors.transparent,
+                                    backgroundColor: screenColor.transparent,
                                     child: IconButton(
                                       onPressed: () => {},
                                       icon: Image.asset(
                                         "images/menu.webp",
                                       ),
-                                      color: Colors.white,
+                                      color: screenColor.white,
                                     ),
                                   ),
                                   decoration: BoxDecoration(
@@ -118,8 +118,8 @@ class _HeroScreenState extends State<HeroScreen> {
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
                                         colors: [
-                                          Colors.white.withOpacity(0.6),
-                                          Colors.white.withOpacity(0.1),
+                                          screenColor.white.withOpacity(0.6),
+                                          screenColor.white.withOpacity(0.1),
                                         ]),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -132,7 +132,7 @@ class _HeroScreenState extends State<HeroScreen> {
                     left: 20,
                     right: 20,
                     child: Material(
-                      color: Colors.transparent,
+                      color: screenColor.transparent,
                       child: ClipRRect(
                         child: BackdropFilter(
                           filter: ImageFilter.blur(
@@ -147,7 +147,7 @@ class _HeroScreenState extends State<HeroScreen> {
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                   colors: [
-                                    Colors.white.withOpacity(0.6),
+                                    screenColor.white.withOpacity(0.6),
                                     Colors.black54.withOpacity(0.1),
                                   ]),
                               borderRadius: BorderRadius.circular(20),
@@ -161,7 +161,7 @@ class _HeroScreenState extends State<HeroScreen> {
                                   Text(
                                     widget.travel.location,
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 22),
+                                        color: screenColor.grey, fontSize: 22),
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -173,7 +173,7 @@ class _HeroScreenState extends State<HeroScreen> {
                                         children: [
                                           Container(
                                               decoration: BoxDecoration(
-                                                  color: color_Theme,
+                                                  color: screenColor.themeColor,
                                                   borderRadius:
                                                       BorderRadius.circular(8)),
                                               child: Padding(
@@ -189,7 +189,7 @@ class _HeroScreenState extends State<HeroScreen> {
                                               Text(
                                                 "Rating",
                                                 style: TextStyle(
-                                                    color: Colors.grey),
+                                                    color: screenColor.grey),
                                               ),
                                               Text(widget.travel.rate),
                                             ],
@@ -214,7 +214,7 @@ class _HeroScreenState extends State<HeroScreen> {
                                     child: Container(
                                       width: width * 0.9,
                                       decoration: BoxDecoration(
-                                          color: color_Theme,
+                                          color: screenColor.themeColor,
                                           borderRadius:
                                               BorderRadius.circular(8)),
                                       child: Padding(
@@ -241,14 +241,14 @@ class _HeroScreenState extends State<HeroScreen> {
                     left: 40,
                     child: Center(
                       child: Material(
-                        color: Colors.transparent,
+                        color: screenColor.transparent,
                         child: CircleAvatar(
-                          backgroundColor: color_Theme,
+                          backgroundColor: screenColor.themeColor,
                           radius: 25,
                           child: IconButton(
                             onPressed: () => {},
                             icon: Icon(Icons.bookmark_add),
-                            color: Colors.white,
+                            color: screenColor.white,
                           ),
                         ),
                       ),
@@ -314,7 +314,7 @@ class deneme extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.grey.withOpacity(0.6),
+              screenColor.grey.withOpacity(0.6),
               Colors.black54.withOpacity(0.5),
             ]),
         borderRadius: BorderRadius.circular(20),
@@ -322,13 +322,13 @@ class deneme extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: Material(
-          color: Colors.transparent,
+          color: screenColor.transparent,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 text,
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: screenColor.grey),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,6 @@ class Locations extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final color_Theme = Color.fromARGB(27, 24, 43, 255);
-    final color_Transparent = Colors.transparent;
 
     final double containerHeight = 300;
     final double circleYukseklik = 50;
@@ -30,7 +29,8 @@ class Locations extends StatelessWidget {
               height: 310,
               width: width * 0.8,
               decoration: BoxDecoration(
-                  color: color_Theme, borderRadius: BorderRadius.circular(20)),
+                  color: screenColor.cardsColor,
+                  borderRadius: BorderRadius.circular(20)),
               child: Column(
                 children: [
                   Padding(
@@ -76,7 +76,7 @@ class Locations extends StatelessWidget {
                                 Icon(
                                   Icons.star,
                                   size: 14,
-                                  color: Colors.blue,
+                                  color: screenColor.themeColor,
                                 ),
                               ],
                             ),
@@ -90,7 +90,7 @@ class Locations extends StatelessWidget {
                             Icon(
                               travel.icon,
                               size: 14,
-                              color: Colors.blue,
+                              color: screenColor.themeColor,
                             ),
                             SizedBox(
                               width: 5,
@@ -117,12 +117,12 @@ class Locations extends StatelessWidget {
               right: 20,
               child: Center(
                 child: CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 52, 112, 161),
+                  backgroundColor: screenColor.themeColor,
                   radius: circleYukseklik / 2,
                   child: IconButton(
                     onPressed: () => {},
                     icon: Icon(Icons.bookmark_add),
-                    color: Colors.white,
+                    color: screenColor.white,
                   ),
                 ),
               ),

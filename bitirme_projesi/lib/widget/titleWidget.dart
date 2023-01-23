@@ -8,8 +8,6 @@ class titleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = "Where do you want to be ?";
-    final color_Theme = Color.fromARGB(27, 24, 43, 255);
-    final color_Transparent = Colors.transparent;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),

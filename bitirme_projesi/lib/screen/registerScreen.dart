@@ -1,3 +1,4 @@
+import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -144,7 +145,7 @@ class input extends StatelessWidget {
       alignment: Alignment.center,
       // ignore: prefer_const_constructors
       child: TextField(
-        cursorColor: Colors.grey,
+        cursorColor: screenColor.grey,
         obscureText: obscureText,
         // keyboardType: TextInputType.number,
         // inputFormatters: <TextInputFormatter>[

@@ -1,3 +1,4 @@
+import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -5,10 +6,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 class bottomNavigation extends StatelessWidget {
   const bottomNavigation({
     Key? key,
-    required this.color_Theme,
   }) : super(key: key);
-
-  final Color color_Theme;
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +15,9 @@ class bottomNavigation extends StatelessWidget {
     int _page = 0;
 
     return CurvedNavigationBar(
-      color: Colors.grey.shade800,
-      backgroundColor: Colors.transparent,
-      animationDuration: Duration(milliseconds: 400),
-      buttonBackgroundColor: Colors.grey.shade600,
+      color: screenColor.unselectColor,
+      backgroundColor: screenColor.transparent,
+      animationDuration: Duration(milliseconds: 500),
       items: [
         Icon(Icons.home),
         Icon(Icons.add),
