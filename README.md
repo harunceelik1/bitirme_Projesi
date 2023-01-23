@@ -1,4 +1,7 @@
 # bitirme_Projesi
 
-https://user-images.githubusercontent.com/102540561/213014217-e7b263f3-040c-4c79-b089-02595fa72a6d.mp4
+
+
+
+https://user-images.githubusercontent.com/102540561/213548782-434c5bbf-1e83-4607-a4da-8903ed70c07a.mp4
 
