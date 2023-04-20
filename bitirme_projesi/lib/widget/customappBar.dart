@@ -42,10 +42,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       radius: 25,
                       backgroundColor: screenColor.cardsColor,
                       child: IconButton(
-                        onPressed: () => {},
-                        icon: Image.asset(
-                          "images/menu.webp",
-                        ),
+                        splashColor: screenColor.transparent,
+                        onPressed: () =>
+                            {Navigator.pushNamed(context, '/loginScreen')},
+                        icon: Icon(Icons.close),
                         color: screenColor.white,
                       ),
                     ),

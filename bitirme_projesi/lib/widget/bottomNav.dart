@@ -23,13 +23,12 @@ class bottomNavigation extends StatelessWidget {
         Icon(Icons.home),
         InkWell(
             onTap: () {
-              // context.go('/new');
-              context.push('/new');
-
               setState() {}
             },
             child: Icon(Icons.add)),
-        Icon(Icons.bookmark_add_outlined),
+        Icon(
+          Icons.bookmark_add_outlined,
+        ),
       ],
       onTap: (index) {
         setState(() {

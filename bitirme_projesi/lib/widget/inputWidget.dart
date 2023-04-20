@@ -6,6 +6,8 @@ class InputWidget extends StatefulWidget {
   final IconData icon;
   final bool obscureText;
   final bool showImage;
+  final TextEditingController textEdit;
+  final Function(String)? onChanged;
 
   const InputWidget({
     Key? key,
@@ -13,6 +15,8 @@ class InputWidget extends StatefulWidget {
     required this.icon,
     required this.obscureText,
     required this.showImage,
+    required this.textEdit,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -33,6 +37,8 @@ class _InputWidgetState extends State<InputWidget> {
       ),
       alignment: Alignment.center,
       child: TextField(
+        controller: widget.textEdit,
+        onChanged: widget.onChanged,
         cursorColor: screenColor.grey,
         obscureText: _obscureText,
         decoration: InputDecoration(

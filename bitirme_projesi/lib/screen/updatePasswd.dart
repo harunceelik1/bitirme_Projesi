@@ -1,76 +1,74 @@
 import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
-import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:bitirme_projesi/widget/inputWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ChangePass extends StatefulWidget {
+  const ChangePass({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ChangePass> createState() => _ChangePassState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ChangePassState extends State<ChangePass> {
+  String name = "";
   String email = "";
+  String phone = "";
   String passwd = "";
-  bool flag = false;
   late Isar isar;
-  TextEditingController passwdController = TextEditingController();
+  bool flag = true;
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwdController = TextEditingController();
+  TextEditingController passwdController1 = TextEditingController();
 
-  checkUser() async {
-    final user =
-        await isar.users.where().filter().emailEqualTo(email).findAll();
-    for (var i in user) {
-      String dbEmail = i.email.toString();
-      String dbPass = i.passwd.toString();
+  Edituser() async {
+    final k = await isar.users.where().filter().emailEqualTo(email).findFirst();
+    if (k?.email == email) {
+      flag = true;
+      final edittuser = User()
+        ..email = email
+        ..name = k?.name
+        ..passwd = passwd
+        ..id = k!.id
+        ..phone = k?.phone;
 
-      if (dbEmail == email && dbPass == passwd) {
-        flag = true;
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return HomePage(
-              //kullanıcı adını da atabiliriz bilgileri değiştirmek için.
-              name: i.name.toString(),
-            );
-          },
-        ));
-        // GoRouter.of(context).push('/screen1');
-      } else {
-        setState(() {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            backgroundColor: Colors.red,
-            content: Text('Şifreniz Hatalı.'),
-          ));
-        });
-      }
-    }
-    if (user.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: Colors.red,
-        content: Text('Böyle Bir Kullanıcı Bulunamamaktadır'),
-      ));
+      await isar.writeTxn(
+        () async {
+          await isar.users.put(edittuser);
+          setState(() {});
+        },
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Şifre Değişti."),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Mail Adresi Bulunamadı."),
+        ),
+      );
     }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     isar = Provider.of<Isar>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
-    final color_Transparent = Colors.transparent;
-    final inputText = 'Name';
-    final inputText2 = 'Surname';
-    final width = MediaQuery.of(context).size.width;
-
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 50,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -83,10 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   color: new Color(0xff1f3b83),
                   gradient: LinearGradient(
-                    colors: [
-                      (new Color(0xff1f3b83)),
-                      new Color(0xff058cc0),
-                    ],
+                    colors: [(new Color(0xff1f3b83)), new Color(0xff058cc0)],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -103,11 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               image: AssetImage("images/tw.png"),
                               fit: BoxFit.cover)),
                     ),
-                    // ignore: prefer_const_constructors
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Text(
-                        "Login",
+                        "Change Password",
                         style: TextStyle(fontSize: 16),
                       ),
                     )
@@ -117,7 +111,6 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 70,
               ),
-              // ignore: prefer_const_constructors
               InputWidget(
                 icon: Icons.email,
                 text: "Enter Email",
@@ -130,7 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 textEdit: emailController,
               ),
-              // ignore: prefer_const_constructors
               InputWidget(
                 icon: Icons.vpn_key,
                 text: "Password",
@@ -143,15 +135,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 textEdit: passwdController,
               ),
-
-              Container(
-                margin: EdgeInsets.only(right: 20, top: 20),
-                alignment: Alignment.centerRight,
-                child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed("/changePass");
-                    },
-                    child: Text("Forget Password ? ")),
+              InputWidget(
+                icon: Icons.vpn_key,
+                text: "Confirm Password",
+                obscureText: true,
+                showImage: true,
+                onChanged: (value) {
+                  setState(() {
+                    // passwd = value;
+                  });
+                },
+                textEdit: passwdController1,
               ),
               SizedBox(
                 height: 70,
@@ -160,10 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.of(context).pushReplacementNamed("/homeScreen");
                     if (flag) {
-                    } else {
-                      checkUser();
+                      Edituser();
                     }
                   },
                   child: Container(
@@ -183,8 +175,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     child: Text(
-                      "LOGIN",
-                      style: TextStyle(color: screenColor.white),
+                      "REGISTER",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -192,25 +184,6 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 50,
               ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("dont't have account ? "),
-                    GestureDetector(
-                      onTap: (() {
-                        // Navigator.of(context)
-                        //     .pushReplacementNamed('/registerScreen');
-                        Navigator.of(context).pushNamed("/registerScreen");
-                      }),
-                      child: Text(
-                        "Register Now",
-                        style: TextStyle(color: Color(0xff058cc0)),
-                      ),
-                    ),
-                  ],
-                ),
-              )
             ],
           ),
         ),

@@ -4,11 +4,11 @@ import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class Locations extends StatelessWidget {
   final Travel travel;
-  Locations(this.travel);
+  final String? name;
+  Locations(this.travel, this.name);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,7 @@ class Locations extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: ((context) => HeroScreen(
                                       travel: travel,
+                                      name: name,
                                     ))));
                         // GoRouter.of(context).push('/hero');
                       },

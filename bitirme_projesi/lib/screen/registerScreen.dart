@@ -1,8 +1,9 @@
+import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
+import 'package:bitirme_projesi/widget/inputWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:isar/isar.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -12,6 +13,52 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  String name = "";
+  String email = "";
+  String phone = "";
+  String passwd = "";
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwdController = TextEditingController();
+  bool goster = true;
+  addUser() async {
+    if (name.isEmpty || phone.isEmpty || email.isEmpty || passwd.isEmpty) {
+      goster = false;
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        backgroundColor: Colors.red,
+        content: Text('Çalışan bilgilerini girmeniz gerekiyor'),
+      ));
+    } else {
+      goster = true;
+      final newUser = User()
+        ..name = name
+        ..email = email
+        ..phone = phone
+        ..passwd = passwd;
+
+      await isar.writeTxn(() async {
+        await isar.users.put(newUser);
+
+        nameController = TextEditingController(text: "");
+        emailController = TextEditingController(text: "");
+        phoneController = TextEditingController(text: "");
+        passwdController = TextEditingController(text: "");
+
+        setState(() {});
+      });
+    }
+  }
+
+  late Isar isar;
+
+  @override
+  void initState() {
+    super.initState();
+    isar = Provider.of<Isar>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,25 +108,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(
                 height: 70,
               ),
-              input(
+              InputWidget(
                 icon: Icons.person,
                 text: "Full Name",
                 obscureText: false,
+                showImage: false,
+                onChanged: (value) {
+                  setState(() {
+                    name = value;
+                  });
+                },
+                textEdit: nameController,
               ),
-              input(
+              InputWidget(
                 icon: Icons.email,
                 text: "Enter Email",
                 obscureText: false,
+                showImage: false,
+                onChanged: (value) {
+                  setState(() {
+                    email = value;
+                  });
+                },
+                textEdit: emailController,
               ),
-              input(
+              InputWidget(
                 icon: Icons.phone,
                 text: "Phone Number",
                 obscureText: false,
+                showImage: false,
+                onChanged: (value) {
+                  setState(() {
+                    phone = value;
+                  });
+                },
+                textEdit: phoneController,
               ),
-              input(
+              InputWidget(
                 icon: Icons.vpn_key,
                 text: "Password",
                 obscureText: true,
+                showImage: true,
+                onChanged: (value) {
+                  setState(() {
+                    passwd = value;
+                  });
+                },
+                textEdit: passwdController,
               ),
               SizedBox(
                 height: 70,
@@ -87,7 +162,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    addUser();
+                    if (goster) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text('Eklendi'),
+                      ));
+                    }
+                  },
                   child: Container(
                     alignment: Alignment.center,
                     width: double.infinity,
@@ -116,50 +199,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class input extends StatelessWidget {
-  final String text;
-  final IconData icon;
-  final bool obscureText;
-  const input({
-    Key? key,
-    required this.text,
-    required this.icon,
-    required this.obscureText,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-      padding: EdgeInsets.only(left: 20, right: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: Colors.grey.shade800.withOpacity(0.5),
-      ),
-      alignment: Alignment.center,
-      // ignore: prefer_const_constructors
-      child: TextField(
-        cursorColor: screenColor.grey,
-        obscureText: obscureText,
-        // keyboardType: TextInputType.number,
-        // inputFormatters: <TextInputFormatter>[
-        //   FilteringTextInputFormatter.digitsOnly
-        // ],
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          icon: Icon(
-            icon,
-            color: Color(0xff058cc0),
-          ),
-          hintText: text,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
         ),
       ),
     );

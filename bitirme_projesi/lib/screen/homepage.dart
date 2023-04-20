@@ -7,7 +7,8 @@ import 'package:bitirme_projesi/widget/customappBar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String? name;
+  const HomePage({super.key, this.name});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,7 +26,9 @@ class _HomePageState extends State<HomePage> {
         appBar: CustomAppBar(),
         body: SingleChildScrollView(
           child: ResponsiveLayout(
-              mobileBody: mobileScreen(),
+              mobileBody: mobileScreen(
+                name: widget.name,
+              ),
               desktopBody: Container(
                 child: Center(child: Text("Desktop..")),
               ),

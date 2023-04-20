@@ -1,6 +1,4 @@
 import 'package:bitirme_projesi/model/travel.dart';
-import 'package:bitirme_projesi/widget/category.dart';
-import 'package:bitirme_projesi/widget/inputSearch.dart';
 import 'package:bitirme_projesi/widget/locations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,7 +7,8 @@ List<Travel> display_list = travel;
 
 class Listeleme extends StatelessWidget {
   final List<Travel> travel;
-  const Listeleme(this.travel);
+  final String? name;
+  const Listeleme(this.travel, this.name);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class Listeleme extends StatelessWidget {
     // print(locationList.travel[1].type);
 
     Locations renderLocations(int index) {
-      return Locations(travel[index]);
+      return Locations(travel[index], name);
     }
 
     return Container(

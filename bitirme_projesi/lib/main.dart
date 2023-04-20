@@ -1,18 +1,24 @@
-import 'package:bitirme_projesi/model/travel.dart';
-import 'package:bitirme_projesi/screen/heroScreen.dart';
+import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:bitirme_projesi/screen/loginScreen.dart';
-import 'package:bitirme_projesi/screen/logoScreen.dart';
-import 'package:bitirme_projesi/screen/mobileScreen.dart';
-import 'package:bitirme_projesi/screen/newScreen.dart';
 import 'package:bitirme_projesi/screen/registerScreen.dart';
+import 'package:bitirme_projesi/screen/updatePasswd.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:isar/isar.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  final isar = await openIsar();
+  runApp(Provider.value(value: isar, child: MyApp()));
 }
 
+Future<Isar> openIsar() async {
+  final isar = await Isar.open(
+    [UserSchema],
+    directory: '',
+  );
+  return isar;
+}
 // final _router = GoRouter(
 //   initialLocation: '/homepage',
 //   routes: [
@@ -49,6 +55,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/homeScreen': (context) => HomePage(),
         '/registerScreen': (context) => RegisterScreen(),
+        '/changePass': (context) => ChangePass(),
+        '/loginScreen': (context) => LoginScreen(),
       },
       themeMode: ThemeMode.dark,
       theme: ThemeData.dark(),

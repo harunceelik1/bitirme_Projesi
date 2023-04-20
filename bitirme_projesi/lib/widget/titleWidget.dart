@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class titleWidget extends StatelessWidget {
+  final String? name;
   const titleWidget({
     Key? key,
+    this.name,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class titleWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi, Vanessa",
+                "Hi, ${name}",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.grey.shade500, fontWeight: FontWeight.w200),
               ),

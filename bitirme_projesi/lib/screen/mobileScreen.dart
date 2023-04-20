@@ -1,3 +1,4 @@
+import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/widget/category.dart';
 import 'dart:developer';
@@ -7,8 +8,10 @@ import 'package:bitirme_projesi/widget/titleWidget.dart';
 import 'package:flutter/material.dart';
 
 class mobileScreen extends StatefulWidget {
+  final String? name;
   const mobileScreen({
     Key? key,
+    this.name,
   }) : super(key: key);
 
   @override
@@ -67,7 +70,9 @@ class _mobileScreenState extends State<mobileScreen> {
     return Column(
       children: [
         // Başlık Yazı Kısmı
-        titleWidget(),
+        titleWidget(
+          name: widget.name,
+        ),
         SizedBox(
           height: 35,
         ),
@@ -89,13 +94,13 @@ class _mobileScreenState extends State<mobileScreen> {
                 child: Text(
                   "Bulunamadı",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: screenColor.white,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               )
-            : Listeleme(_travelData),
+            : Listeleme(_travelData, widget.name),
       ],
     );
   }
