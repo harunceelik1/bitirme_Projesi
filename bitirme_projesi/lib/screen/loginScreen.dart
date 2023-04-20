@@ -1,4 +1,5 @@
 import 'package:bitirme_projesi/model/Colors.dart';
+import 'package:bitirme_projesi/widget/inputWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -36,7 +37,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   color: new Color(0xff1f3b83),
                   gradient: LinearGradient(
-                    colors: [(new Color(0xff1f3b83)), new Color(0xff058cc0)],
+                    colors: [
+                      (new Color(0xff1f3b83)),
+                      new Color(0xff058cc0),
+                    ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -53,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               image: AssetImage("images/tw.png"),
                               fit: BoxFit.cover)),
                     ),
+                    // ignore: prefer_const_constructors
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Text(
@@ -66,15 +71,19 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 70,
               ),
-              input(
+              // ignore: prefer_const_constructors
+              InputWidget(
                 icon: Icons.email,
                 text: "Enter Email",
                 obscureText: false,
+                showImage: false,
               ),
-              input(
+              // ignore: prefer_const_constructors
+              InputWidget(
                 icon: Icons.vpn_key,
                 text: "Password",
                 obscureText: true,
+                showImage: true,
               ),
               Container(
                 margin: EdgeInsets.only(right: 20, top: 20),
@@ -137,46 +146,6 @@ class _LoginScreenState extends State<LoginScreen> {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class input extends StatelessWidget {
-  final String text;
-  final IconData icon;
-  final bool obscureText;
-  const input({
-    Key? key,
-    required this.text,
-    required this.icon,
-    required this.obscureText,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-      padding: EdgeInsets.only(left: 20, right: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: Colors.grey.shade800.withOpacity(0.5),
-      ),
-      alignment: Alignment.center,
-      // ignore: prefer_const_constructors
-      child: TextField(
-        cursorColor: screenColor.grey,
-        obscureText: obscureText,
-        // ignore: prefer_const_constructors
-        decoration: InputDecoration(
-          icon: Icon(
-            icon,
-            color: Color(0xff058cc0),
-          ),
-          hintText: text,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
         ),
       ),
     );

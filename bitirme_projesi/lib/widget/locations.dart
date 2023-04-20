@@ -4,6 +4,7 @@ import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Locations extends StatelessWidget {
   final Travel travel;
@@ -43,6 +44,7 @@ class Locations extends StatelessWidget {
                                 builder: ((context) => HeroScreen(
                                       travel: travel,
                                     ))));
+                        // GoRouter.of(context).push('/hero');
                       },
                       child: Hero(
                         tag: travel.image,
@@ -101,7 +103,7 @@ class Locations extends StatelessWidget {
                                   .textTheme
                                   .subtitle2
                                   ?.copyWith(
-                                      color: Colors.grey,
+                                      color: screenColor.grey,
                                       fontWeight: FontWeight.w300),
                             ),
                           ],

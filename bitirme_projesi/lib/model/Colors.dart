@@ -9,4 +9,5 @@ class screenColor {
   static Color unselectColor = Color.fromARGB(255, 44, 57, 73);
   static Color transparent = Colors.transparent;
   static Color cardsColor = Color.fromARGB(27, 24, 43, 255);
+  static Color loginIcon = Color(0xff058cc0);
 }

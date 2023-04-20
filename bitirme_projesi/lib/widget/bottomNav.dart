@@ -1,6 +1,7 @@
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class bottomNavigation extends StatelessWidget {
@@ -20,7 +21,14 @@ class bottomNavigation extends StatelessWidget {
       animationDuration: Duration(milliseconds: 500),
       items: [
         Icon(Icons.home),
-        Icon(Icons.add),
+        InkWell(
+            onTap: () {
+              // context.go('/new');
+              context.push('/new');
+
+              setState() {}
+            },
+            child: Icon(Icons.add)),
         Icon(Icons.bookmark_add_outlined),
       ],
       onTap: (index) {

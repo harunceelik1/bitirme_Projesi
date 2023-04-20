@@ -20,7 +20,7 @@ class titleWidget extends StatelessWidget {
             children: [
               Text(
                 "Hi, Vanessa",
-                style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.grey.shade500, fontWeight: FontWeight.w200),
               ),
               Wrap(children: [
