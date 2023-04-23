@@ -25,19 +25,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: CustomAppBar(),
         body: SingleChildScrollView(
-          child: ResponsiveLayout(
-              mobileBody: mobileScreen(
-                name: widget.name,
-              ),
-              desktopBody: Container(
-                child: Center(child: Text("Desktop..")),
-              ),
-              tabletBody: Container(
-                child: Center(
-                  child: Text("Tablet.."),
-                ),
-              )),
-        ),
+            // child: ResponsiveLayout(
+            //     mobileBody: mobileScreen(
+            //       name: widget.name,
+            //     ),
+            //     desktopBody: Container(
+            //       child: Center(child: Text("Desktop..")),
+            //     ),
+            //     tabletBody: Container(
+            //       child: Center(
+            //         child: Text("Tablet.."),
+            //       ),
+            //     )),
+            child: mobileScreen(
+          name: widget.name,
+        )),
         bottomNavigationBar: bottomNavigation());
   }
 }

@@ -13,7 +13,7 @@ class InputWidget extends StatefulWidget {
     Key? key,
     required this.text,
     required this.icon,
-    required this.obscureText,
+    this.obscureText = false,
     required this.showImage,
     required this.textEdit,
     this.onChanged,
@@ -24,7 +24,7 @@ class InputWidget extends StatefulWidget {
 }
 
 class _InputWidgetState extends State<InputWidget> {
-  bool _obscureText = false;
+  bool _gorunurluk = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _InputWidgetState extends State<InputWidget> {
         controller: widget.textEdit,
         onChanged: widget.onChanged,
         cursorColor: screenColor.grey,
-        obscureText: _obscureText,
+        obscureText: widget.obscureText && !_gorunurluk,
         decoration: InputDecoration(
           icon: Icon(
             widget.icon,
@@ -49,19 +49,32 @@ class _InputWidgetState extends State<InputWidget> {
           hintText: widget.text,
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
-          suffixIcon: widget.showImage
-              ? InkWell(
-                  splashColor: screenColor.transparent,
-                  onTap: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                  child: Icon(
-                    _obscureText ? Icons.visibility_off : Icons.visibility,
-                    color: screenColor.loginIcon,
-                  ),
-                )
+          suffixIcon: widget.obscureText
+              ? _gorunurluk
+                  ? InkWell(
+                      splashColor: screenColor.transparent,
+                      onTap: () {
+                        setState(() {
+                          _gorunurluk = false;
+                        });
+                      },
+                      child: Icon(
+                        Icons.visibility,
+                        color: screenColor.loginIcon,
+                      ),
+                    )
+                  : InkWell(
+                      splashColor: screenColor.transparent,
+                      onTap: () {
+                        setState(() {
+                          _gorunurluk = true;
+                        });
+                      },
+                      child: Icon(
+                        Icons.visibility_off,
+                        color: screenColor.loginIcon,
+                      ),
+                    )
               : null,
         ),
       ),

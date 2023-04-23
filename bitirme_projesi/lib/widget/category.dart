@@ -1,13 +1,6 @@
 import 'dart:developer';
-
 import 'package:bitirme_projesi/model/Colors.dart';
-import 'package:bitirme_projesi/model/travel.dart';
-import 'package:bitirme_projesi/widget/list.dart';
-import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 
 class Categories extends StatefulWidget {
   Function filterTravel;
@@ -25,6 +18,7 @@ class _CategoriesState extends State<Categories> {
     "Camp",
     "Mountain",
     "History",
+    "deneme",
   ];
 
   List<Map<String, dynamic>> categoriesList = [
@@ -32,8 +26,11 @@ class _CategoriesState extends State<Categories> {
     {"id": 'Camp'},
     {"id": 'Mountain'},
     {"id": 'History'},
+    {"id": 'deneme'},
   ];
   int selectItem = -1;
+
+  bool beachSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,16 +47,33 @@ class _CategoriesState extends State<Categories> {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectItem = index;
-                          var deneme = categoriesList[index]["id"];
-                          print(deneme);
-                        });
-                        widget.filterTravel(categoriesList[index]["id"], false);
-                      },
-                      child: Container(
+                itemBuilder: (context, index) => Container(
+                      child: GestureDetector(
+                        //...
+
+// Öğe seçildiğinde, seçilen öğeyi güncelleyin ve filtreTravel işlevini çağırın.
+                        onTap: () {
+                          setState(() {
+                            // Seçilen öğe, tıklanan öğeyle aynı değilse, seçilen öğeyi güncelleyin.
+                            if (selectItem != index) {
+                              selectItem = index;
+                              var deneme = categoriesList[index]["id"];
+                              print(deneme);
+                              // Filtreleme işlevini çağırın ve seçilen öğenin ID'sini iletin.
+                              widget.filterTravel(
+                                  categoriesList[index]["id"], false);
+                            }
+                            // Seçilen öğe, tıklanan öğeyle aynı ise, seçilen öğeyi sıfırlayın.
+                            else {
+                              selectItem = -1;
+                              // Filtreleme işlevini çağırın ve boş bir dize iletin.
+                              widget.filterTravel("", false);
+                            }
+                          });
+                        },
+
+//...
+
                         child: Card(
                           color: selectItem == index
                               ? screenColor.themeColor

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bitirme_projesi/screen/loginScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../enum/duration.dart';
 
@@ -25,8 +26,9 @@ class _LogoScreenState extends State<LogoScreen> {
   }
 
   loginRoute() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: ((context) => LoginScreen())));
+    // Navigator.pushReplacement(
+    //     context, MaterialPageRoute(builder: ((context) => LoginScreen())));
+    GoRouter.of(context).pushReplacement('/loginScreen');
   }
 
   @override

@@ -34,7 +34,7 @@ class _ChangePassState extends State<ChangePass> {
         ..name = k?.name
         ..passwd = passwd
         ..id = k!.id
-        ..phone = k?.phone;
+        ..phone = k.phone;
 
       await isar.writeTxn(
         () async {

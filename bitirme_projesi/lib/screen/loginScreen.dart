@@ -3,6 +3,7 @@ import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:bitirme_projesi/widget/inputWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 
@@ -149,7 +150,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 child: InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamed("/changePass");
+                      // Navigator.of(context).pushNamed("/changePass");
+                      GoRouter.of(context).pushNamed('changePass');
                     },
                     child: Text("Forget Password ? ")),
               ),
@@ -201,7 +203,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: (() {
                         // Navigator.of(context)
                         //     .pushReplacementNamed('/registerScreen');
-                        Navigator.of(context).pushNamed("/registerScreen");
+                        // Navigator.of(context).pushNamed("/registerScreen");
+                        GoRouter.of(context).push("/registerScreen");
                       }),
                       child: Text(
                         "Register Now",

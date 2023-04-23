@@ -2,6 +2,7 @@
 
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -43,8 +44,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       backgroundColor: screenColor.cardsColor,
                       child: IconButton(
                         splashColor: screenColor.transparent,
-                        onPressed: () =>
-                            {Navigator.pushNamed(context, '/loginScreen')},
+                        onPressed: () => {
+                          GoRouter.of(context).push('/loginScreen'),
+                          // Navigator.pushNamed(context, '/loginScreen')
+                        },
                         icon: Icon(Icons.close),
                         color: screenColor.white,
                       ),

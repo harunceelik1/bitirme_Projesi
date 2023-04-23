@@ -1,8 +1,7 @@
 import 'package:bitirme_projesi/model/Colors.dart';
+import 'package:bitirme_projesi/screen/loginScreen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class bottomNavigation extends StatelessWidget {
   const bottomNavigation({
@@ -13,8 +12,8 @@ class bottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
-    int _page = 0;
-
+    int page = 0;
+    final screens = [LoginScreen()];
     return CurvedNavigationBar(
       color: screenColor.unselectColor,
       backgroundColor: screenColor.transparent,
@@ -32,7 +31,7 @@ class bottomNavigation extends StatelessWidget {
       ],
       onTap: (index) {
         setState(() {
-          _page = index;
+          page = index;
         });
       },
     );
