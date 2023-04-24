@@ -176,7 +176,7 @@ class _ChangePassState extends State<ChangePass> {
                     ),
                     child: Text(
                       "REGISTER",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: screenColor.white),
                     ),
                   ),
                 ),

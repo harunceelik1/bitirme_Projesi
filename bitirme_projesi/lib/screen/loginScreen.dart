@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (context) {
             return HomePage(
               //kullanıcı adını da atabiliriz bilgileri değiştirmek için.
-              name: i.name.toString(),
+              user: i,
             );
           },
         ));

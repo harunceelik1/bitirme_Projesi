@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/heroScreen.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 
 class Locations extends StatelessWidget {
   final Travel travel;
-  final String? name;
-  Locations(this.travel, this.name);
+  final User user;
+  Locations(this.travel, this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +40,14 @@ class Locations extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => HeroScreen(
-                                      travel: travel,
-                                      name: name,
-                                    ))));
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => HeroScreen(
+                                  travel: travel,
+                                  user: user,
+                                )),
+                          ),
+                        );
                         // GoRouter.of(context).push('/hero');
                       },
                       child: Hero(

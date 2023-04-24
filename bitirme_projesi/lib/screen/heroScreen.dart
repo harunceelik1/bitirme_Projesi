@@ -2,16 +2,17 @@
 
 import 'dart:ui';
 
+import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:flutter/material.dart';
 
 class HeroScreen extends StatefulWidget {
-  final String? name;
+  final User user;
   final Travel travel;
 
-  const HeroScreen({super.key, required this.travel, this.name});
+  const HeroScreen({super.key, required this.travel, required this.user});
 
   @override
   State<HeroScreen> createState() => _HeroScreenState();
@@ -67,7 +68,7 @@ class _HeroScreenState extends State<HeroScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: ((context) => HomePage(
-                                                      name: widget.name,
+                                                      user: widget.user,
                                                     ))))
                                       },
                                       icon: Icon(Icons.arrow_back),

@@ -1,3 +1,4 @@
+import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/widget/category.dart';
@@ -8,10 +9,10 @@ import 'package:bitirme_projesi/widget/titleWidget.dart';
 import 'package:flutter/material.dart';
 
 class mobileScreen extends StatefulWidget {
-  final String? name;
+  final User user;
   const mobileScreen({
     Key? key,
-    this.name,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -71,7 +72,7 @@ class _mobileScreenState extends State<mobileScreen> {
       children: [
         // Başlık Yazı Kısmı
         titleWidget(
-          name: widget.name,
+          user: widget.user,
         ),
         SizedBox(
           height: 35,
@@ -100,7 +101,7 @@ class _mobileScreenState extends State<mobileScreen> {
                   ),
                 ),
               )
-            : Listeleme(_travelData, widget.name),
+            : Listeleme(_travelData, widget.user),
       ],
     );
   }

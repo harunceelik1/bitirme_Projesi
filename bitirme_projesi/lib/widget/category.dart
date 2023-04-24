@@ -51,7 +51,7 @@ class _CategoriesState extends State<Categories> {
                       child: GestureDetector(
                         //...
 
-// Öğe seçildiğinde, seçilen öğeyi güncelleyin ve filtreTravel işlevini çağırın.
+                        // Öğe seçildiğinde, seçilen öğeyi güncelleyin ve filtreTravel işlevini çağırın.
                         onTap: () {
                           setState(() {
                             // Seçilen öğe, tıklanan öğeyle aynı değilse, seçilen öğeyi güncelleyin.
@@ -71,9 +71,6 @@ class _CategoriesState extends State<Categories> {
                             }
                           });
                         },
-
-//...
-
                         child: Card(
                           color: selectItem == index
                               ? screenColor.themeColor

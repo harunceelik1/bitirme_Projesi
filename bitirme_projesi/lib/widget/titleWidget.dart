@@ -1,10 +1,11 @@
+import 'package:bitirme_projesi/db/user.dart';
 import 'package:flutter/material.dart';
 
 class titleWidget extends StatelessWidget {
-  final String? name;
-  const titleWidget({
+  final User user;
+  titleWidget({
     Key? key,
-    this.name,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -21,7 +22,7 @@ class titleWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi, ${name}",
+                "Hi, ${user.name}",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.grey.shade500, fontWeight: FontWeight.w200),
               ),

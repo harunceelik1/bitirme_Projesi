@@ -1,3 +1,4 @@
+import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/widget/locations.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,8 @@ List<Travel> display_list = travel;
 
 class Listeleme extends StatelessWidget {
   final List<Travel> travel;
-  final String? name;
-  const Listeleme(this.travel, this.name);
+  final User user;
+  const Listeleme(this.travel, this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class Listeleme extends StatelessWidget {
     // print(locationList.travel[1].type);
 
     Locations renderLocations(int index) {
-      return Locations(travel[index], name);
+      return Locations(travel[index], user);
     }
 
     return Container(

@@ -16,6 +16,8 @@ void main() async {
   runApp(Provider.value(value: isar, child: MyApp()));
 }
 
+late User user;
+
 Future<Isar> openIsar() async {
   final dir =
       await getApplicationDocumentsDirectory(); //cihazın dir konumunu alır
@@ -36,7 +38,9 @@ final _router = GoRouter(
     ),
     GoRoute(
       path: '/homepage',
-      builder: (context, state) => HomePage(),
+      builder: (context, state) => HomePage(
+        user: user,
+      ),
     ),
     GoRoute(
       name:

@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:bitirme_projesi/screen/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../enum/duration.dart';
 
 class LogoScreen extends StatefulWidget {
