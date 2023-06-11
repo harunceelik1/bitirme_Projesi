@@ -31,7 +31,7 @@ class SheetBottom extends StatelessWidget {
             builder: (context) {
               return Container(
                 width: double.infinity,
-                height: height / 2.5,
+                height: height / 2,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       // <-- SEE HERE

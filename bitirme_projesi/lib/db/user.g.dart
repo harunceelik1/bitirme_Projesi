@@ -22,18 +22,23 @@ const UserSchema = CollectionSchema(
       name: r'email',
       type: IsarType.string,
     ),
-    r'name': PropertySchema(
+    r'favoriteTravelIds': PropertySchema(
       id: 1,
+      name: r'favoriteTravelIds',
+      type: IsarType.longList,
+    ),
+    r'name': PropertySchema(
+      id: 2,
       name: r'name',
       type: IsarType.string,
     ),
     r'passwd': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'passwd',
       type: IsarType.string,
     ),
     r'phone': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'phone',
       type: IsarType.string,
     )
@@ -49,7 +54,7 @@ const UserSchema = CollectionSchema(
   getId: _userGetId,
   getLinks: _userGetLinks,
   attach: _userAttach,
-  version: '3.1.0',
+  version: '3.1.0+1',
 );
 
 int _userEstimateSize(
@@ -64,6 +69,7 @@ int _userEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.favoriteTravelIds.length * 8;
   {
     final value = object.name;
     if (value != null) {
@@ -92,9 +98,10 @@ void _userSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.email);
-  writer.writeString(offsets[1], object.name);
-  writer.writeString(offsets[2], object.passwd);
-  writer.writeString(offsets[3], object.phone);
+  writer.writeLongList(offsets[1], object.favoriteTravelIds);
+  writer.writeString(offsets[2], object.name);
+  writer.writeString(offsets[3], object.passwd);
+  writer.writeString(offsets[4], object.phone);
 }
 
 User _userDeserialize(
@@ -105,10 +112,11 @@ User _userDeserialize(
 ) {
   final object = User();
   object.email = reader.readStringOrNull(offsets[0]);
+  object.favoriteTravelIds = reader.readLongList(offsets[1]) ?? [];
   object.id = id;
-  object.name = reader.readStringOrNull(offsets[1]);
-  object.passwd = reader.readStringOrNull(offsets[2]);
-  object.phone = reader.readStringOrNull(offsets[3]);
+  object.name = reader.readStringOrNull(offsets[2]);
+  object.passwd = reader.readStringOrNull(offsets[3]);
+  object.phone = reader.readStringOrNull(offsets[4]);
   return object;
 }
 
@@ -122,10 +130,12 @@ P _userDeserializeProp<P>(
     case 0:
       return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongList(offset) ?? []) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
+      return (reader.readStringOrNull(offset)) as P;
+    case 4:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -361,6 +371,150 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
         property: r'email',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsElementEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'favoriteTravelIds',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsElementGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'favoriteTravelIds',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsElementLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'favoriteTravelIds',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsElementBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'favoriteTravelIds',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'favoriteTravelIds',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> favoriteTravelIdsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'favoriteTravelIds',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'favoriteTravelIds',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'favoriteTravelIds',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'favoriteTravelIds',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      favoriteTravelIdsLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'favoriteTravelIds',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -973,6 +1127,12 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
     });
   }
 
+  QueryBuilder<User, User, QDistinct> distinctByFavoriteTravelIds() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'favoriteTravelIds');
+    });
+  }
+
   QueryBuilder<User, User, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1005,6 +1165,12 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
   QueryBuilder<User, String?, QQueryOperations> emailProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'email');
+    });
+  }
+
+  QueryBuilder<User, List<int>, QQueryOperations> favoriteTravelIdsProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'favoriteTravelIds');
     });
   }
 

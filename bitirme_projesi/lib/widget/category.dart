@@ -18,7 +18,6 @@ class _CategoriesState extends State<Categories> {
     "Camp",
     "Mountain",
     "History",
-    "deneme",
   ];
 
   List<Map<String, dynamic>> categoriesList = [
@@ -26,7 +25,6 @@ class _CategoriesState extends State<Categories> {
     {"id": 'Camp'},
     {"id": 'Mountain'},
     {"id": 'History'},
-    {"id": 'deneme'},
   ];
   int selectItem = -1;
 

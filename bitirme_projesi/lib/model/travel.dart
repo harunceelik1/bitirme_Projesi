@@ -19,6 +19,8 @@ class Travel {
       required this.type,
       required this.descp,
       required this.price});
+
+  Object? toJson() {}
 }
 
 String text = "";
@@ -61,6 +63,26 @@ List<Travel> travel = [
     icon: Icons.flag,
     location: 'Türkiye',
     type: 'History',
+    descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
+    price: '\$ 560',
+  ),
+  Travel(
+    image: 'images/rocky.jpg',
+    name: 'Rocky Dağları',
+    rate: "4.7",
+    icon: Icons.flag,
+    location: 'ABD',
+    type: 'Mountain',
+    descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
+    price: '\$ 560',
+  ),
+  Travel(
+    image: 'images/kirkju.webp',
+    name: 'Kirkjufell Dağı',
+    rate: "4.7",
+    icon: Icons.flag,
+    location: 'İzlanda',
+    type: 'Mountain',
     descp: 'Açıklama gelmesi gerekiyor bu kısıma.',
     price: '\$ 560',
   ),

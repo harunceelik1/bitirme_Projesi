@@ -4,6 +4,9 @@ import 'package:bitirme_projesi/screen/loginScreen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../model/travel.dart';
+import '../screen/favories.dart';
+
 typedef void IntCallback(int id);
 
 class bottomNavigation extends StatefulWidget {
@@ -32,10 +35,41 @@ class _bottomNavigationState extends State<bottomNavigation> {
       items: [
         Icon(Icons.home),
         Icon(Icons.add),
-        Icon(Icons.bookmark_add_outlined),
+        InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Favories(),
+                ),
+              );
+            },
+            child: Icon(Icons.bookmark_add_outlined)),
       ],
       onTap: (index) {
-        widget.changeIndex(index);
+        switch (index) {
+          case 0:
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Favories(),
+              ),
+            );
+            break;
+          case 1:
+            // Add page
+            break;
+          case 2:
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Favories(),
+              ),
+            );
+            break;
+          default:
+            break;
+        }
       },
     );
   }

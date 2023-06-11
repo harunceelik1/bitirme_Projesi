@@ -1,9 +1,13 @@
 import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/widget/inputWidget.dart';
+import 'package:bitirme_projesi/widget/snackDesign.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -26,10 +30,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
   addUser() async {
     if (name.isEmpty || phone.isEmpty || email.isEmpty || passwd.isEmpty) {
       goster = false;
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: Colors.red,
-        content: Text('Çalışan bilgilerini girmeniz gerekiyor'),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: snackDesign(
+            text1: "Dikkat ! ",
+            text2: "Lütfen bilgileri doldurunuz ! ",
+            colorSnack: screenColor.snackRed,
+            image: Image.asset("images/danger.png"),
+            image2: Image.asset("images/paint-splash.png"),
+          ),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: screenColor.transparent,
+          elevation: 0,
+        ),
+      );
     } else {
       goster = true;
       final newUser = User()
@@ -38,16 +52,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ..phone = phone
         ..passwd = passwd;
 
-      await isar.writeTxn(() async {
-        await isar.users.put(newUser);
-
-        nameController = TextEditingController(text: "");
-        emailController = TextEditingController(text: "");
-        phoneController = TextEditingController(text: "");
-        passwdController = TextEditingController(text: "");
-
-        setState(() {});
-      });
+      await isar.writeTxn(
+        () async {
+          await isar.users.put(newUser);
+          setState(
+            () {
+              nameController.text = "";
+              emailController.text = "";
+              phoneController.text = "";
+              passwdController.text = "";
+              name = "";
+              email = "";
+              phone = "";
+              passwd = "";
+            },
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: snackDesign(
+                text1: "Kişi Eklenmiştir !",
+                text2: "",
+                colorSnack: screenColor.snackGreen,
+                image: Image.asset("images/ok.png"),
+                image2: Image.asset("images/blur.png"),
+              ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: screenColor.transparent,
+              elevation: 0,
+            ),
+          );
+        },
+      );
     }
   }
 
@@ -78,9 +113,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   color: new Color(0xff1f3b83),
                   gradient: LinearGradient(
-                    colors: [(new Color(0xff1f3b83)), new Color(0xff058cc0)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                      Color.fromARGB(255, 44, 93, 114),
+                      Color(0xFF203A43),
+                    ],
                   ),
                 ),
                 child: Center(
@@ -91,15 +129,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Container(
                       height: 300,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("images/tw.png"),
-                              fit: BoxFit.cover)),
+                        image: DecorationImage(
+                            image: AssetImage("images/tw.png"),
+                            fit: BoxFit.cover),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Text(
                         "Register",
-                        style: TextStyle(fontSize: 16),
+                        style: GoogleFonts.roboto(
+                            fontSize: 16, color: screenColor.white),
                       ),
                     )
                   ],
@@ -109,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 70,
               ),
               InputWidget(
-                icon: Icons.person,
+                icon: Iconsax.user,
                 text: "Full Name",
                 obscureText: false,
                 showImage: false,
@@ -121,8 +161,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 textEdit: nameController,
               ),
               InputWidget(
-                icon: Icons.email,
+                icon: Iconsax.sms,
                 text: "Enter Email",
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(20),
+                  FilteringTextInputFormatter.singleLineFormatter,
+                ],
                 obscureText: false,
                 showImage: false,
                 onChanged: (value) {
@@ -133,10 +177,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 textEdit: emailController,
               ),
               InputWidget(
-                icon: Icons.phone,
+                icon: Iconsax.call,
                 text: "Phone Number",
                 obscureText: false,
                 showImage: false,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(10),
+                  FilteringTextInputFormatter.singleLineFormatter,
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                ],
                 onChanged: (value) {
                   setState(() {
                     phone = value;
@@ -145,10 +194,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 textEdit: phoneController,
               ),
               InputWidget(
-                icon: Icons.vpn_key,
+                icon: Iconsax.key,
                 text: "Password",
                 obscureText: true,
                 showImage: true,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(15),
+                  FilteringTextInputFormatter.singleLineFormatter,
+                ],
                 onChanged: (value) {
                   setState(() {
                     passwd = value;
@@ -162,14 +215,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: InkWell(
+                  borderRadius: BorderRadius.circular(30),
                   onTap: () {
                     addUser();
-                    if (goster) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text('Eklendi'),
-                      ));
-                    }
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -179,17 +227,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(20),
                       color: new Color(0xff1f3b83),
                       gradient: LinearGradient(
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
                         colors: [
-                          (new Color(0xff1f3b83)),
-                          new Color(0xff058cc0)
+                          Color.fromARGB(255, 44, 93, 114),
+                          Color(0xFF203A43),
                         ],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
                       ),
                     ),
                     child: Text(
                       "REGISTER",
-                      style: TextStyle(color: Colors.white),
+                      style: GoogleFonts.roboto(
+                          fontSize: 16, color: screenColor.white),
                     ),
                   ),
                 ),

@@ -1,5 +1,7 @@
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:iconsax/iconsax.dart';
 
 class InputWidget extends StatefulWidget {
   final String text;
@@ -8,6 +10,7 @@ class InputWidget extends StatefulWidget {
   final bool showImage;
   final TextEditingController textEdit;
   final Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   const InputWidget({
     Key? key,
@@ -17,6 +20,7 @@ class InputWidget extends StatefulWidget {
     required this.showImage,
     required this.textEdit,
     this.onChanged,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -37,6 +41,7 @@ class _InputWidgetState extends State<InputWidget> {
       ),
       alignment: Alignment.center,
       child: TextField(
+        inputFormatters: widget.inputFormatters,
         controller: widget.textEdit,
         onChanged: widget.onChanged,
         cursorColor: screenColor.grey,
@@ -59,7 +64,7 @@ class _InputWidgetState extends State<InputWidget> {
                         });
                       },
                       child: Icon(
-                        Icons.visibility,
+                        Iconsax.eye,
                         color: screenColor.loginIcon,
                       ),
                     )
@@ -71,7 +76,7 @@ class _InputWidgetState extends State<InputWidget> {
                         });
                       },
                       child: Icon(
-                        Icons.visibility_off,
+                        Iconsax.eye_slash,
                         color: screenColor.loginIcon,
                       ),
                     )

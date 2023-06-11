@@ -7,6 +7,10 @@ import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+
+import 'favories.dart';
 
 class HeroScreen extends StatefulWidget {
   final User user;
@@ -22,6 +26,8 @@ class _HeroScreenState extends State<HeroScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    final double circleYukseklik = 50;
+
     String text;
 
     var height = MediaQuery.of(context).size.height;
@@ -182,7 +188,7 @@ class _HeroScreenState extends State<HeroScreen> {
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: Icon(Icons.star),
+                                                child: Icon(Iconsax.star5),
                                               )),
                                           SizedBox(
                                             width: 10,
@@ -245,14 +251,29 @@ class _HeroScreenState extends State<HeroScreen> {
                     child: Center(
                       child: Material(
                         color: screenColor.transparent,
-                        child: CircleAvatar(
-                          backgroundColor: screenColor.themeColor,
-                          radius: 25,
-                          child: IconButton(
-                            onPressed: () => {},
-                            icon: Icon(Icons.bookmark_add),
-                            color: screenColor.white,
-                          ),
+                        child: Consumer<TravelProvider>(
+                          builder: (context, travelProvider, _) {
+                            final isFavorite =
+                                travelProvider.isFavorite(widget.travel);
+                            return CircleAvatar(
+                              backgroundColor: screenColor.themeColor,
+                              radius: circleYukseklik / 2,
+                              child: IconButton(
+                                onPressed: () {
+                                  if (isFavorite) {
+                                    travelProvider
+                                        .removeFavorite(widget.travel);
+                                  } else {
+                                    travelProvider.addFavorite(widget.travel);
+                                  }
+                                },
+                                icon: Icon(
+                                  isFavorite ? Iconsax.heart5 : Iconsax.heart,
+                                ),
+                                color: screenColor.white,
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

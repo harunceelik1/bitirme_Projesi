@@ -5,6 +5,7 @@ import 'package:bitirme_projesi/widget/bottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:isar/isar.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -46,7 +47,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                           print("sa");
                         },
                         child: Icon(
-                          Icons.photo_camera_outlined,
+                          Iconsax.user,
                           color: screenColor.black,
                           size: 50,
                         ),

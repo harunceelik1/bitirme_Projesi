@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class screenColor {
   static Color black = Color.fromARGB(255, 0, 0, 0);
   static Color white = Color.fromARGB(255, 255, 255, 255);
+  static Color snackRed = Color(0xFFC72C41);
+  static Color snackGreen = Color.fromARGB(255, 43, 189, 75);
   static Color grey = Colors.grey;
   static Color red = Colors.red;
   static Color themeColor = Color.fromARGB(255, 52, 112, 161);

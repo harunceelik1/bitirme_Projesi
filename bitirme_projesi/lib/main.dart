@@ -1,4 +1,5 @@
 import 'package:bitirme_projesi/db/user.dart';
+import 'package:bitirme_projesi/screen/favories.dart';
 import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:bitirme_projesi/screen/loginScreen.dart';
 import 'package:bitirme_projesi/screen/logoScreen.dart';
@@ -13,20 +14,22 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final isar = await openIsar();
-  runApp(Provider.value(value: isar, child: MyApp()));
+  runApp(Provider.value(
+      value: isar,
+      child: MultiProvider(providers: [
+        ChangeNotifierProvider(create: (_) => TravelProvider()),
+      ], child: MyApp())));
 }
 
 late User user;
 
 Future<Isar> openIsar() async {
-  final dir =
-      await getApplicationDocumentsDirectory(); //cihazın dir konumunu alır
-  final isar = await Isar.open([UserSchema], directory: dir.path);
+  final isar = await Isar.open([UserSchema], directory: '');
   return isar;
 }
 
 final _router = GoRouter(
-  initialLocation: '/logoinit',
+  initialLocation: '/loginScreen',
   routes: [
     GoRoute(
       path: '/logoinit',
@@ -52,6 +55,7 @@ final _router = GoRouter(
     //   builder: (context, state) => HeroScreen(
     //     travel: state.params['travel'],
     //   ),
+
     GoRoute(path: '/loginScreen', builder: (context, state) => LoginScreen()),
   ],
 );
@@ -84,3 +88,29 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// return BlocProvider(
+//       create: (context) => SettingsCubit(SettingsState()),
+//       child:
+//           BlocBuilder<SettingsCubit, SettingsState>(builder: (context, state) {
+//         return MaterialApp.router(
+//           // materialapp.router yapıp configi aç kullanırken GOROUTERİ
+//           title: 'Travel App',
+//           // routerConfig: _router,
+//           debugShowCheckedModeBanner: false,
+//           darkTheme: ThemeData(
+//             brightness: Brightness.dark,
+//             /* dark theme settings */
+//           ),
+//           // routes: {
+//           //   '/homeScreen': (context) => HomePage(),
+//           //   '/registerScreen': (context) => RegisterScreen(),
+//           //   '/changePass': (context) => ChangePass(),
+//           //   '/loginScreen': (context) => LoginScreen(),
+//           // },
+//           routerConfig: _router,
+//           themeMode: ThemeMode.dark,
+//           theme: ThemeData.dark(),
+//           // home: LoginScreen(),
+//         );
+//       }),
+//     );

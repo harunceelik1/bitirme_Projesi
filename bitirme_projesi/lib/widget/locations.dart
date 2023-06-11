@@ -3,8 +3,12 @@
 import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/model/travel.dart';
+import 'package:bitirme_projesi/screen/favories.dart';
 import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 
 class Locations extends StatelessWidget {
   final Travel travel;
@@ -25,7 +29,6 @@ class Locations extends StatelessWidget {
       builder: (context, contraints) => Container(
         child: Stack(
           clipBehavior: Clip.none,
-          // alignment: Alignment.bottomRight,
           children: [
             Container(
               height: 310,
@@ -48,7 +51,6 @@ class Locations extends StatelessWidget {
                                 )),
                           ),
                         );
-                        // GoRouter.of(context).push('/hero');
                       },
                       child: Hero(
                         tag: travel.image,
@@ -122,14 +124,27 @@ class Locations extends StatelessWidget {
               top: top,
               right: 20,
               child: Center(
-                child: CircleAvatar(
-                  backgroundColor: screenColor.themeColor,
-                  radius: circleYukseklik / 2,
-                  child: IconButton(
-                    onPressed: () => {},
-                    icon: Icon(Icons.bookmark_add),
-                    color: screenColor.white,
-                  ),
+                child: Consumer<TravelProvider>(
+                  builder: (context, travelProvider, _) {
+                    final isFavorite = travelProvider.isFavorite(travel);
+                    return CircleAvatar(
+                      backgroundColor: screenColor.themeColor,
+                      radius: circleYukseklik / 2,
+                      child: IconButton(
+                        onPressed: () {
+                          if (isFavorite) {
+                            travelProvider.removeFavorite(travel);
+                          } else {
+                            travelProvider.addFavorite(travel);
+                          }
+                        },
+                        icon: Icon(
+                          isFavorite ? Iconsax.heart5 : Iconsax.heart,
+                        ),
+                        color: screenColor.white,
+                      ),
+                    );
+                  },
                 ),
               ),
             )
