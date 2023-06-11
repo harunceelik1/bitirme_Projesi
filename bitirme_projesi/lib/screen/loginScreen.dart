@@ -10,10 +10,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/settings_cubit.dart';
-import '../storage/user_manager.dart';
+import '../storage/storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,10 +24,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email = "";
   String passwd = "";
+  late final SettingsCubit settings;
+
   bool flag = false;
   late Isar isar;
   // late final SettingsCubit settings;
-  final UserManager userManager = UserManager();
+  AppStorage appStorage = AppStorage();
 
   TextEditingController passwdController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -61,15 +62,24 @@ class _LoginScreenState extends State<LoginScreen> {
         flag = true;
         // settings.userLogin();
         // await userManager.saveUserCredentials(email, passwd);
-
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return HomePage(
-              //kullanıcı adını da atabiliriz bilgileri değiştirmek için.
-              user: i,
-            );
-          },
-        ));
+        List<String> data = [
+          i.name.toString(),
+          i.passwd.toString(),
+          i.email.toString(),
+          i.phone.toString()
+        ];
+        settings.userLogin(
+            data); // userLogin çağrısında data'yı userInfo olarak kullan
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return HomePage(
+                  //kullanıcı adını da atabiliriz bilgileri değiştirmek için.
+                  );
+            },
+          ),
+        );
         // GoRouter.of(context).push('/screen1');
       } else if (dbEmail != email || dbPass != passwd) {
         setState(() {
@@ -108,31 +118,12 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  @override
   void initState() {
-    // settings = context.read<SettingsCubit>();
-    // TODO: implement initState
     super.initState();
-    // checkSavedUserCredentials();
+    settings = context.read<SettingsCubit>();
 
     isar = Provider.of<Isar>(context, listen: false);
   }
-
-  // void checkSavedUserCredentials() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String? savedEmail = prefs.getString('email');
-  //   String? savedPassword = prefs.getString('password');
-
-  //   if (savedEmail != null && savedPassword != null) {
-  //     bool isLoggedIn =
-  //         await userManager.checkUserCredentials(savedEmail, savedPassword);
-  //     if (isLoggedIn) {
-  //       GoRouter.of(context).replace("/homepage");
-  //     } else {
-  //       GoRouter.of(context).replace("/loginScreen");
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,26 @@
 import 'package:bitirme_projesi/db/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class titleWidget extends StatelessWidget {
-  final User user;
+import '../bloc/settings_cubit.dart';
+
+class titleWidget extends StatefulWidget {
   titleWidget({
     Key? key,
-    required this.user,
   }) : super(key: key);
+
+  @override
+  State<titleWidget> createState() => _titleWidgetState();
+}
+
+class _titleWidgetState extends State<titleWidget> {
+  late final SettingsCubit settings;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    settings = context.read<SettingsCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +36,7 @@ class titleWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi, ${user.name}",
+                settings.state.userInfo[0],
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.grey.shade500, fontWeight: FontWeight.w200),
               ),

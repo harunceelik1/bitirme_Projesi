@@ -11,9 +11,8 @@ import 'package:provider/provider.dart';
 import '../bloc/settings_cubit.dart';
 
 class HomePage extends StatefulWidget {
-  final User user;
   late int? sayi;
-  HomePage({super.key, this.sayi, required this.user});
+  HomePage({super.key, this.sayi});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -49,25 +48,16 @@ class _HomePageState extends State<HomePage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    final screens = [
-      mobileScreen(
-        user: widget.user,
-      ),
-      CustomAppBar(
-        user: widget.user,
-      )
-    ];
+    final screens = [mobileScreen(), CustomAppBar()];
     getScreenByIndex(int index) {
       print("getscreenBy");
       print(index);
       return screens[index];
     }
 
-    print(widget.user.email);
+    // print(widget.user.email);
     return Scaffold(
-      appBar: CustomAppBar(
-        user: widget.user,
-      ),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         // child: ResponsiveLayout(
         //     mobileBody: mobileScreen(

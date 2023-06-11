@@ -8,8 +8,9 @@ List<Travel> display_list = travel;
 
 class Listeleme extends StatelessWidget {
   final List<Travel> travel;
-  final User user;
-  const Listeleme(this.travel, this.user);
+  const Listeleme(
+    this.travel,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class Listeleme extends StatelessWidget {
     // print(locationList.travel[1].type);
 
     Locations renderLocations(int index) {
-      return Locations(travel[index], user);
+      return Locations(travel[index]);
     }
 
     return Container(

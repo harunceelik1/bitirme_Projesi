@@ -12,8 +12,9 @@ import 'package:provider/provider.dart';
 
 class Locations extends StatelessWidget {
   final Travel travel;
-  final User user;
-  Locations(this.travel, this.user);
+  Locations(
+    this.travel,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,6 @@ class Locations extends StatelessWidget {
                           MaterialPageRoute(
                             builder: ((context) => HeroScreen(
                                   travel: travel,
-                                  user: user,
                                 )),
                           ),
                         );

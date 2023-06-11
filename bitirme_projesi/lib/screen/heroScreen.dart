@@ -13,10 +13,9 @@ import 'package:provider/provider.dart';
 import 'favories.dart';
 
 class HeroScreen extends StatefulWidget {
-  final User user;
   final Travel travel;
 
-  const HeroScreen({super.key, required this.travel, required this.user});
+  const HeroScreen({super.key, required this.travel});
 
   @override
   State<HeroScreen> createState() => _HeroScreenState();
@@ -74,7 +73,6 @@ class _HeroScreenState extends State<HeroScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: ((context) => HomePage(
-                                                      user: widget.user,
                                                     ))))
                                       },
                                       icon: Icon(Icons.arrow_back),

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:bitirme_projesi/bloc/settings_cubit.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class Categories extends StatefulWidget {
 class _CategoriesState extends State<Categories> {
   List<String> tags = [];
   int tag = -1;
+  late final SettingsCubit setting;
   List<String> options = [
     "Beach",
     "Camp",

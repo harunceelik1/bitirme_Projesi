@@ -3,14 +3,19 @@ import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/widget/bottomSheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:isar/isar.dart';
+import 'package:provider/provider.dart';
+
+import '../bloc/settings_cubit.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final User user;
-  CustomAppBar({super.key, required this.user});
+  CustomAppBar({
+    super.key,
+  });
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -19,13 +24,18 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(110);
 }
 
-late Isar isar;
-
 class _CustomAppBarState extends State<CustomAppBar> {
+  late Isar isar;
+  late final SettingsCubit settings;
+  void initState() {
+    super.initState();
+    settings = context.read<SettingsCubit>();
+    isar = Provider.of<Isar>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    String text;
     var height = MediaQuery.of(context).size.height;
 
     return SafeArea(
@@ -68,7 +78,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "İsim : ${widget.user.name}",
+                          "İsim : ${settings.state.userInfo[0]}",
                           style: GoogleFonts.poppins(
                               fontSize: 18, color: screenColor.white),
                         )
@@ -82,7 +92,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Telefon No : ${widget.user.phone}",
+                          "İsim : ${settings.state.userInfo[3]}",
                           style: GoogleFonts.poppins(
                               fontSize: 18, color: screenColor.white),
                         )

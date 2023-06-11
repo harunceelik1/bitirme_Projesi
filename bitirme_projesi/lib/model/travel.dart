@@ -20,7 +20,7 @@ class Travel {
       required this.descp,
       required this.price});
 
-  Object? toJson() {}
+  static fromJson(jsonDecode) {}
 }
 
 String text = "";

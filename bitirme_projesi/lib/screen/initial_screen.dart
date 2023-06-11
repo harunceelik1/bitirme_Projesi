@@ -1,114 +1,110 @@
-// import 'dart:io';
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import '../bloc/settings_cubit.dart';
+import '../storage/storage.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:go_router/go_router.dart';
+class InitialScreen extends StatefulWidget {
+  const InitialScreen({super.key});
 
-// import '../bloc/settings_cubit.dart';
-// import '../storage/storage.dart';
-// import 'package:flutter/foundation.dart' show kIsWeb;
+  @override
+  State<InitialScreen> createState() => _InitialScreenState();
+}
 
-// import '../storage/user_manager.dart';
+class _InitialScreenState extends State<InitialScreen> {
+  bool loading = true;
+  late SettingsCubit settings;
 
-// class InitialScreen extends StatefulWidget {
-//   const InitialScreen({super.key});
+  loadApp() async {
+    try {
+      final storage = AppStorage();
+      var data = await storage.readAll();
 
-//   @override
-//   State<InitialScreen> createState() => _InitialScreenState();
-// }
+      if (data["darkMode"] == null) {
+        // there is no darkMode in Storage
+        // set Default darkMode
+        if (ThemeMode.system == ThemeMode.dark) {
+          // device is in dark mode
+          data["darkMode"] = true;
+        } else {
+          // device is in light mode
+          data["darkMode"] = false;
+        }
+        // await storage.writeAppSettings(language: "", darkMode: data["darkMode"]);
+      }
 
-// class _InitialScreenState extends State<InitialScreen> {
-//   bool loading = true;
-//   late SettingsCubit settings;
+      // if (data["language"] == null) {
+      //   // set Default Language
+      //   if (kIsWeb) {
+      //     data["language"] = "tr";
+      //     await storage.writeAppSettings(
+      //         language: data["language"], darkMode: data["darkMode"]);
+      //   } else {
+      //     final String defaultLocale = Platform.localeName;
+      //     // en_US
+      //     // tr_TR
+      //     var liste = defaultLocale.split('_');
+      //     // ["en","US"]
+      //     // ["tr", "TR"]
+      //     var isSupported =
+      //         AppLocalizations.delegate.isSupported(Locale(liste[0], ""));
+      //     if (isSupported) {
+      //       data["language"] = liste[0];
+      //       await storage.writeAppSettings(
+      //           language: data["language"], darkMode: data["darkMode"]);
+      //     } else {
+      //       data["language"] = "en";
+      //       await storage.writeAppSettings(
+      //           language: data["language"], darkMode: data["darkMode"]);
+      //     }
+      //   }
+      // }
+      if (data["loggedIn"] == null) {
+        data["loggedIn"] = false;
+        data["userInfo"] = [];
+        await storage.writeUserData(isLoggedIn: false, userInfo: []);
+      }
+      // apply settings to app state
+      // settings.changeDarkMode(data["darkMode"]);
+      // settings.changeLanguage(data["language"]);
+      if (data["loggedIn"]) {
+      } else {
+        settings.userLogout();
+      }
+      setState(() {
+        loading = false;
+      });
 
-//   loadApp() async {
-//     try {
-//       final storage = AppStorage();
-//       var data = await storage.readAll();
+      if (data["loggedIn"]) {
+        GoRouter.of(context).replace("/homepage");
+      } else {
+        GoRouter.of(context).replace("/loginScreen");
+      }
+    } catch (e) {}
+  }
 
-//       if (data["darkMode"] == null) {
-//         // there is no darkMode in Storage
-//         // set Default darkMode
-//         if (ThemeMode.system == ThemeMode.dark) {
-//           // device is in dark mode
-//           data["darkMode"] = true;
-//         } else {
-//           // device is in light mode
-//           data["darkMode"] = false;
-//         }
-//         // await storage.writeAppSettings(language: "", darkMode: data["darkMode"]);
-//       }
+  @override
+  void initState() {
+    settings = context.read<SettingsCubit>();
+    super.initState();
+    loadApp();
+  }
 
-//       // if (data["language"] == null) {
-//       //   // set Default Language
-//       //   if (kIsWeb) {
-//       //     data["language"] = "tr";
-//       //     await storage.writeAppSettings(
-//       //         language: data["language"], darkMode: data["darkMode"]);
-//       //   } else {
-//       //     final String defaultLocale = Platform.localeName;
-//       //     // en_US
-//       //     // tr_TR
-//       //     var liste = defaultLocale.split('_');
-//       //     // ["en","US"]
-//       //     // ["tr", "TR"]
-//       //     var isSupported =
-//       //         AppLocalizations.delegate.isSupported(Locale(liste[0], ""));
-//       //     if (isSupported) {
-//       //       data["language"] = liste[0];
-//       //       await storage.writeAppSettings(
-//       //           language: data["language"], darkMode: data["darkMode"]);
-//       //     } else {
-//       //       data["language"] = "en";
-//       //       await storage.writeAppSettings(
-//       //           language: data["language"], darkMode: data["darkMode"]);
-//       //     }
-//       //   }
-//       // }
-//       if (data["loggedIn"] == null) {
-//         data["loggedIn"] = false;
-//         data["userInfo"] = [];
-//         await storage.writeUserData(isLoggedIn: false, userInfo: []);
-//       }
-//       // apply settings to app state
-//       settings.changeDarkMode(data["darkMode"]);
-//       settings.changeLanguage(data["language"]);
-//       if (data["loggedIn"]) {
-//       } else {
-//         settings.userLogout();
-//       }
-//       setState(() {
-//         loading = false;
-//       });
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
-//       if (data["loggedIn"]) {
-//         GoRouter.of(context).replace("/homepage");
-//       } else {
-//         GoRouter.of(context).replace("/loginScreen");
-//       }
-//     } catch (e) {}
-//   }
-
-//   @override
-//   void initState() {
-//     settings = context.read<SettingsCubit>();
-//     super.initState();
-//     loadApp();
-//   }
-
-//   @override
-//   void dispose() {
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Scaffold(
-//         body: loading
-//             ? Center(child: CircularProgressIndicator())
-//             : Text("Loaded"),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: loading
+            ? Center(child: CircularProgressIndicator())
+            : Text("Loaded"),
+      ),
+    );
+  }
+}
