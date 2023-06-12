@@ -92,7 +92,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "İsim : ${settings.state.userInfo[3]}",
+                          "Telefon No : ${settings.state.userInfo[3]}",
                           style: GoogleFonts.poppins(
                               fontSize: 18, color: screenColor.white),
                         )
@@ -109,8 +109,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       radius: 25,
                       backgroundColor: screenColor.cardsColor,
                       child: IconButton(
-                        onPressed: () => {},
-                        icon: Image.asset("images/notification.webp"),
+                        onPressed: () => {
+                          GoRouter.of(context).push('/settings'),
+                        },
+                        icon: Icon(Iconsax.setting),
+                        color: screenColor.white,
                       ),
                     ),
                     SizedBox(

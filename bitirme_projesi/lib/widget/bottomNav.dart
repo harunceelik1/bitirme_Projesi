@@ -3,6 +3,7 @@ import 'package:bitirme_projesi/screen/homepage.dart';
 import 'package:bitirme_projesi/screen/loginScreen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../model/travel.dart';
 import '../screen/favories.dart';
@@ -44,7 +45,7 @@ class _bottomNavigationState extends State<bottomNavigation> {
                 ),
               );
             },
-            child: Icon(Icons.bookmark_add_outlined)),
+            child: Icon(Iconsax.heart)),
       ],
       onTap: (index) {
         switch (index) {
@@ -52,7 +53,7 @@ class _bottomNavigationState extends State<bottomNavigation> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Favories(),
+                builder: (context) => HomePage(),
               ),
             );
             break;

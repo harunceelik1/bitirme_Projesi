@@ -18,12 +18,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-int index = 0;
-
 class _HomePageState extends State<HomePage> {
   final title = "Where do you want to be ?";
   late Isar isar;
-  // late final SettingsCubit settings;
+  late final SettingsCubit settings;
+  int index = 0;
 
   void indexAl(int index1) {
     print("indexAl");
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    // settings = context.read<SettingsCubit>();
+    settings = context.read<SettingsCubit>();
 
     super.initState();
     isar = Provider.of<Isar>(context, listen: false);
@@ -49,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     final width = MediaQuery.of(context).size.width;
 
     final screens = [mobileScreen(), CustomAppBar()];
+
     getScreenByIndex(int index) {
       print("getscreenBy");
       print(index);

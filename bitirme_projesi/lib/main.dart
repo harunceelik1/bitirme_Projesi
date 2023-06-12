@@ -6,7 +6,10 @@ import 'package:bitirme_projesi/screen/loginScreen.dart';
 import 'package:bitirme_projesi/screen/logoScreen.dart';
 import 'package:bitirme_projesi/screen/mobileScreen.dart';
 import 'package:bitirme_projesi/screen/registerScreen.dart';
+import 'package:bitirme_projesi/screen/settings_screen.dart';
 import 'package:bitirme_projesi/screen/updatePasswd.dart';
+import 'package:bitirme_projesi/themes/themes.dart';
+import 'package:bitirme_projesi/widget/titleWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -35,7 +38,7 @@ Future<Isar> openIsar() async {
 }
 
 final _router = GoRouter(
-  initialLocation: '/loginScreen',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
@@ -51,13 +54,23 @@ final _router = GoRouter(
     ),
     GoRoute(
       path: '/homePage',
-      builder: (context, state) => mobileScreen(),
+      builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => SettingsScreen(),
     ),
     GoRoute(
       name:
           "changePass", //pushname kullanırsak buradaki adı yazıyoruz push kullanırsak pathteki yeri yazıyoruz
       path: '/change-Pass',
       builder: (context, state) => ChangePass(),
+    ),
+    GoRoute(
+      name:
+          "titleWidget", //pushname kullanırsak buradaki adı yazıyoruz push kullanırsak pathteki yeri yazıyoruz
+      path: '/titleWidget',
+      builder: (context, state) => titleWidget(),
     ),
 
     // GoRoute(
@@ -85,10 +98,7 @@ class MyApp extends StatelessWidget {
           title: 'Travel App',
           // routerConfig: _router,
           debugShowCheckedModeBanner: false,
-          darkTheme: ThemeData(
-            brightness: Brightness.dark,
-            /* dark theme settings */
-          ),
+
           // routes: {
           //   '/homeScreen': (context) => HomePage(),
           //   '/registerScreen': (context) => RegisterScreen(),
@@ -96,8 +106,9 @@ class MyApp extends StatelessWidget {
           //   '/loginScreen': (context) => LoginScreen(),
           // },
           routerConfig: _router,
-          themeMode: ThemeMode.dark,
-          theme: ThemeData.dark(),
+          themeMode: state.darkMode ? ThemeMode.dark : ThemeMode.light,
+          theme: Themes.lightTheme,
+          darkTheme: Themes.darkTheme,
           // home: LoginScreen(),
         );
       }),

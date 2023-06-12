@@ -12,6 +12,7 @@ import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:provider/provider.dart';
 
 import '../model/travel.dart';
+import '../widget/bottomNav.dart';
 
 class Favories extends StatefulWidget {
   Favories({Key? key});
@@ -22,6 +23,16 @@ class Favories extends StatefulWidget {
 
 class TravelProvider extends ChangeNotifier {
   List<Travel> favoriler = []; // Favori konumları tutan liste
+  int index = 0;
+
+  void indexAl(int index1) {
+    print("indexAl");
+    print(index1);
+
+    setState(() {
+      index = index1;
+    });
+  }
 
   void addFavorite(Travel travel) {
     if (!favoriler.contains(travel)) {
@@ -107,6 +118,9 @@ class _FavoriesState extends State<Favories> {
             );
           },
         ),
+      ),
+      bottomNavigationBar: bottomNavigation(
+        changeIndex: indexAl,
       ),
     );
   }

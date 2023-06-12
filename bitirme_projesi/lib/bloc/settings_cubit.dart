@@ -26,21 +26,21 @@ class SettingsCubit extends Cubit<SettingsState> {
   //   //burada hafızaya yazıyoruz.
   // }
 
-  // changeDarkMode(bool darkMode) async {
-  //   final newState = SettingsState(
-  //     language: state.language,
-  //     darkMode: darkMode,
-  //     userInfo: state.userInfo,
-  //     userLoggedIn: state.userLoggedIn,
-  //   );
+  changeDarkMode(bool darkMode) async {
+    final newState = SettingsState(
+      language: state.language,
+      darkMode: darkMode,
+      userInfo: state.userInfo,
+      userLoggedIn: state.userLoggedIn,
+    );
 
-  //   emit(newState);
-  //   final storage = AppStorage();
-  //   await storage.writeAppSettings(
-  //     darkMode: darkMode,
-  //     language: state.language,
-  //   );
-  // }
+    emit(newState);
+    final storage = AppStorage();
+    await storage.writeAppSettings(
+      darkMode: darkMode,
+      language: state.language,
+    );
+  }
 
   userLogin(List<String> userInfo) async {
     final newState = SettingsState(

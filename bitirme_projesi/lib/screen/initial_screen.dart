@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -32,44 +33,46 @@ class _InitialScreenState extends State<InitialScreen> {
           // device is in light mode
           data["darkMode"] = false;
         }
-        // await storage.writeAppSettings(language: "", darkMode: data["darkMode"]);
+        await storage.writeAppSettings(
+            language: "", darkMode: data["darkMode"]);
       }
 
-      // if (data["language"] == null) {
-      //   // set Default Language
-      //   if (kIsWeb) {
-      //     data["language"] = "tr";
-      //     await storage.writeAppSettings(
-      //         language: data["language"], darkMode: data["darkMode"]);
-      //   } else {
-      //     final String defaultLocale = Platform.localeName;
-      //     // en_US
-      //     // tr_TR
-      //     var liste = defaultLocale.split('_');
-      //     // ["en","US"]
-      //     // ["tr", "TR"]
-      //     var isSupported =
-      //         AppLocalizations.delegate.isSupported(Locale(liste[0], ""));
-      //     if (isSupported) {
-      //       data["language"] = liste[0];
-      //       await storage.writeAppSettings(
-      //           language: data["language"], darkMode: data["darkMode"]);
-      //     } else {
-      //       data["language"] = "en";
-      //       await storage.writeAppSettings(
-      //           language: data["language"], darkMode: data["darkMode"]);
-      //     }
-      //   }
-      // }
+      if (data["language"] == null) {
+        // set Default Language
+        if (kIsWeb) {
+          data["language"] = "tr";
+          await storage.writeAppSettings(
+              language: data["language"], darkMode: data["darkMode"]);
+        } else {
+          final String defaultLocale = Platform.localeName;
+          // en_US
+          // tr_TR
+          var liste = defaultLocale.split('_');
+          // ["en","US"]
+          // ["tr", "TR"]
+          // var isSupported =
+          //     AppLocalizations.delegate.isSupported(Locale(liste[0], ""));
+          // if (isSupported) {
+          //   data["language"] = liste[0];
+          //   await storage.writeAppSettings(
+          //       language: data["language"], darkMode: data["darkMode"]);
+          // } else {
+          //   data["language"] = "en";
+          //   await storage.writeAppSettings(
+          //       language: data["language"], darkMode: data["darkMode"]);
+          // }
+        }
+      }
       if (data["loggedIn"] == null) {
         data["loggedIn"] = false;
         data["userInfo"] = [];
         await storage.writeUserData(isLoggedIn: false, userInfo: []);
       }
       // apply settings to app state
-      // settings.changeDarkMode(data["darkMode"]);
+      settings.changeDarkMode(data["darkMode"]);
       // settings.changeLanguage(data["language"]);
       if (data["loggedIn"]) {
+        settings.userLogin(data["userInfo"]);
       } else {
         settings.userLogout();
       }
@@ -78,7 +81,7 @@ class _InitialScreenState extends State<InitialScreen> {
       });
 
       if (data["loggedIn"]) {
-        GoRouter.of(context).replace("/homepage");
+        GoRouter.of(context).replace("/homePage");
       } else {
         GoRouter.of(context).replace("/loginScreen");
       }

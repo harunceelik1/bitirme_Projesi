@@ -257,6 +257,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flex_color_scheme:
+    dependency: "direct main"
+    description:
+      name: flex_color_scheme
+      sha256: "5be124fa61821a684c0628ca5f687a8512db06738f784516278688eb727a3ef1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.1.2"
+  flex_seed_scheme:
+    dependency: transitive
+    description:
+      name: flex_seed_scheme
+      sha256: e4168a6fc88a3e5bc3d6b7a748c6a6083eedc193d343ddc26bbad7fb1b258555
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
   flexi_chip:
     dependency: transitive
     description:
@@ -749,6 +765,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  switcher_button:
+    dependency: "direct main"
+    description:
+      name: switcher_button
+      sha256: "532fa81813faf0fd21f233b75e0ca955512b86b6f784fd33804a5ababa4ac71b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   term_glyph:
     dependency: transitive
     description:
@@ -862,5 +886,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=3.0.0-0 <4.0.0"
-  flutter: ">=3.3.0"
+  dart: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
