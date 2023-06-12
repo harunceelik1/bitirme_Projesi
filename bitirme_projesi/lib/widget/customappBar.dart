@@ -28,12 +28,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _CustomAppBarState extends State<CustomAppBar> {
   late Isar isar;
-  late final SettingsCubit settings;
-  void initState() {
-    super.initState();
-    settings = context.read<SettingsCubit>();
-    isar = Provider.of<Isar>(context, listen: false);
-  }
+  late final SettingsCubit settings = context.read<SettingsCubit>();
 
   askLogout() {
     showDialog(
@@ -48,8 +43,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             child: Text(AppLocalizations.of(context).getTranslate("yes")),
             onPressed: () {
               settings.userLogout();
-              Navigator.of(context).pop();
-              GoRouter.of(context).replace('/loginScreen');
+              GoRouter.of(context).push('/loginScreen');
             },
           ),
           CupertinoDialogAction(
@@ -63,6 +57,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
     );
   }
 
+  void initState() {
+    super.initState();
+    isar = Provider.of<Isar>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -74,7 +73,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            // ignore: prefer_const_literals_to_create_immutables
             children: [
               SheetBottom(
                 content: Column(
@@ -109,7 +107,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       children: [
                         Text(
                           AppLocalizations.of(context).getTranslate("name") +
-                              " : ${settings.state.userInfo[0]}",
+                              " : ${settings.state.userInfo.isNotEmpty ? settings.state.userInfo[0] : ''}",
                           style: GoogleFonts.poppins(
                               fontSize: 18, color: screenColor.white),
                         )
@@ -124,7 +122,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       children: [
                         Text(
                           AppLocalizations.of(context).getTranslate("phone") +
-                              " : ${settings.state.userInfo[3]}",
+                              " : ${settings.state.userInfo.length >= 4 ? settings.state.userInfo[3] : ''}",
                           style: GoogleFonts.poppins(
                               fontSize: 18, color: screenColor.white),
                         )

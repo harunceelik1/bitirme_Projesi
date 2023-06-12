@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
+import '../bloc/settings_cubit.dart';
 import '../localizations/localizations.dart';
 import 'favories.dart';
 
@@ -29,6 +30,7 @@ class _HeroScreenState extends State<HeroScreen> {
     final double circleYukseklik = 50;
 
     String text;
+    late final SettingsCubit settings = context.read<SettingsCubit>();
 
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -261,18 +263,21 @@ class _HeroScreenState extends State<HeroScreen> {
                         color: screenColor.transparent,
                         child: Consumer<TravelProvider>(
                           builder: (context, travelProvider, _) {
-                            final isFavorite =
-                                travelProvider.isFavorite(widget.travel);
+                            final isFavorite = travelProvider.isFavorite(
+                                settings.state.userInfo[4], widget.travel);
                             return CircleAvatar(
                               backgroundColor: screenColor.themeColor,
                               radius: circleYukseklik / 2,
                               child: IconButton(
                                 onPressed: () {
                                   if (isFavorite) {
-                                    travelProvider
-                                        .removeFavorite(widget.travel);
+                                    travelProvider.removeFavorite(
+                                        settings.state.userInfo[4],
+                                        widget.travel);
                                   } else {
-                                    travelProvider.addFavorite(widget.travel);
+                                    travelProvider.addFavorite(
+                                        settings.state.userInfo[4],
+                                        widget.travel);
                                   }
                                 },
                                 icon: Icon(

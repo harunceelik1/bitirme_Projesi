@@ -35,9 +35,13 @@ class _titleWidgetState extends State<titleWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                settings.state.userInfo[0],
+                settings.state.userInfo.isNotEmpty
+                    ? settings.state.userInfo[0]
+                    : '',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey.shade500, fontWeight: FontWeight.w200),
+                      color: Colors.grey.shade500,
+                      fontWeight: FontWeight.w200,
+                    ),
               ),
               Wrap(children: [
                 Text(

@@ -67,7 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
           i.name.toString(),
           i.passwd.toString(),
           i.email.toString(),
-          i.phone.toString()
+          i.phone.toString(),
+          i.id.toString(),
         ];
         settings.userLogin(
             data); // userLogin çağrısında data'yı userInfo olarak kullan

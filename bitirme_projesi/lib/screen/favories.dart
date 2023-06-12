@@ -3,16 +3,13 @@ import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
-
 import '../bloc/settings_cubit.dart';
 import '../db/user.dart';
 import '../localizations/localizations.dart';
 import '../model/travel.dart';
-
 import 'package:flutter/material.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:provider/provider.dart';
-
 import '../model/travel.dart';
 import '../widget/bottomNav.dart';
 
@@ -26,51 +23,56 @@ class Favories extends StatefulWidget {
 int index = 0;
 
 class TravelProvider extends ChangeNotifier {
-  List<Travel> favoriler = []; // Favori konumları tutan liste
+  Map<String, List<Travel>> favorilerMap = {};
 
-  void indexAl(int index1) {
-    print("indexAl");
-    print(index1);
-
-    setState(() {
-      index = index1;
-    });
-  }
-
-  void addFavorite(Travel travel) {
-    if (!favoriler.contains(travel)) {
-      favoriler.add(travel);
+  void addFavorite(String userId, Travel travel) {
+    if (!favorilerMap.containsKey(userId)) {
+      favorilerMap[userId] = [];
+    }
+    if (!favorilerMap[userId]!.contains(travel)) {
+      favorilerMap[userId]!.add(travel);
       notifyListeners();
     }
   }
 
-  void removeFavorite(Travel travel) {
-    favoriler.remove(travel);
-    notifyListeners();
+  void removeFavorite(String userId, Travel travel) {
+    if (favorilerMap.containsKey(userId)) {
+      favorilerMap[userId]!.remove(travel);
+      notifyListeners();
+    }
   }
 
-  bool isFavorite(Travel travel) {
-    return favoriler.contains(travel);
+  bool isFavorite(String userId, Travel travel) {
+    if (favorilerMap.containsKey(userId)) {
+      return favorilerMap[userId]!.contains(travel);
+    }
+    return false;
+  }
+
+  List<Travel> getFavorites(String userId) {
+    if (favorilerMap.containsKey(userId)) {
+      return favorilerMap[userId]!;
+    }
+    return [];
   }
 }
 
 class _FavoriesState extends State<Favories> {
-  int index = 0;
+  late String userId;
 
-  void indexAl(int index1) {
-    print("indexAl");
-    print(index1);
-
-    setState(() {
-      index = index1;
-    });
+  @override
+  void initState() {
+    super.initState();
+    final settings = context.read<SettingsCubit>();
+    userId = settings.state.userInfo[4].toString();
   }
 
   @override
   Widget build(BuildContext context) {
+    final settings = context.read<SettingsCubit>();
     final travelProvider = Provider.of<TravelProvider>(context);
-    final favoriler = travelProvider.favoriler;
-    late final SettingsCubit settings = context.read<SettingsCubit>();
+
+    final favoriler = travelProvider.getFavorites(userId);
 
     return Scaffold(
       appBar: AppBar(
@@ -132,7 +134,7 @@ class _FavoriesState extends State<Favories> {
                       Iconsax.trash,
                     ),
                     onPressed: () {
-                      travelProvider.removeFavorite(favoriKonum);
+                      travelProvider.removeFavorite(userId, favoriKonum);
                     },
                   ),
                 ),
