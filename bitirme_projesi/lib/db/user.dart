@@ -1,4 +1,5 @@
 import "package:isar/isar.dart";
+
 part "user.g.dart";
 
 @collection
@@ -12,6 +13,4 @@ class User {
   String? phone;
 
   String? passwd;
-
-  List<int> favoriteTravelIds = [];
 }

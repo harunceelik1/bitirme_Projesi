@@ -9,6 +9,7 @@ import 'package:bitirme_projesi/screen/mobileScreen.dart';
 import 'package:bitirme_projesi/screen/registerScreen.dart';
 import 'package:bitirme_projesi/screen/settings_screen.dart';
 import 'package:bitirme_projesi/screen/updatePasswd.dart';
+import 'package:bitirme_projesi/screen/update_info.dart';
 import 'package:bitirme_projesi/themes/themes.dart';
 import 'package:bitirme_projesi/widget/titleWidget.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,12 @@ final _router = GoRouter(
           "favories", //pushname kullanırsak buradaki adı yazıyoruz push kullanırsak pathteki yeri yazıyoruz
       path: '/favories',
       builder: (context, state) => Favories(),
+    ),
+    GoRoute(
+      name:
+          "update", //pushname kullanırsak buradaki adı yazıyoruz push kullanırsak pathteki yeri yazıyoruz
+      path: '/update',
+      builder: (context, state) => UpdateInfo(),
     ),
 
     // GoRoute(

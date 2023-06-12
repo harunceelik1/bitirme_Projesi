@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 
+import '../bloc/settings_cubit.dart';
 import '../db/user.dart';
 import '../localizations/localizations.dart';
 import '../model/travel.dart';
@@ -26,6 +27,7 @@ int index = 0;
 
 class TravelProvider extends ChangeNotifier {
   List<Travel> favoriler = []; // Favori konumları tutan liste
+
   void indexAl(int index1) {
     print("indexAl");
     print(index1);
@@ -68,10 +70,17 @@ class _FavoriesState extends State<Favories> {
   Widget build(BuildContext context) {
     final travelProvider = Provider.of<TravelProvider>(context);
     final favoriler = travelProvider.favoriler;
+    late final SettingsCubit settings = context.read<SettingsCubit>();
 
     return Scaffold(
       appBar: AppBar(
-          title: Text(AppLocalizations.of(context).getTranslate("favorites"))),
+        backgroundColor: settings.state.darkMode
+            ? Colors.transparent
+            : screenColor.themeColor,
+        title: Text(
+          AppLocalizations.of(context).getTranslate("favorites"),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: ListView.builder(

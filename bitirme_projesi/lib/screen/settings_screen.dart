@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:switcher_button/switcher_button.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
@@ -16,59 +17,55 @@ class SettingsScreen extends StatefulWidget {
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
+late final SettingsCubit settings;
+
 class _SettingsScreenState extends State<SettingsScreen> {
-  late final SettingsCubit settings;
-
   @override
-  dynamic _showActionSheet(BuildContext context) {
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        title: Text(
-            AppLocalizations.of(context).getTranslate('language_selection')),
-        message: Text(
-            AppLocalizations.of(context).getTranslate('language_selection2')),
-        actions: <CupertinoActionSheetAction>[
-          CupertinoActionSheetAction(
-            isDefaultAction: true,
-            onPressed: () {
-              settings.changeLanguage("tr");
-              Navigator.pop(context);
-            },
-            child: const Text('Turkce'),
-          ),
-          CupertinoActionSheetAction(
-            onPressed: () {
-              settings.changeLanguage("en");
-              Navigator.pop(context);
-            },
-            child: const Text('English'),
-          ),
-          CupertinoActionSheetAction(
-            isDestructiveAction: true,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(AppLocalizations.of(context).getTranslate('cancel')),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    settings = context.read<SettingsCubit>();
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    late final SettingsCubit settings = context.read<SettingsCubit>();
+    dynamic _showActionSheet(BuildContext context) {
+      showCupertinoModalPopup<void>(
+        context: context,
+        builder: (BuildContext context) => CupertinoActionSheet(
+          title: Text(
+              AppLocalizations.of(context).getTranslate('language_selection')),
+          message: Text(
+              AppLocalizations.of(context).getTranslate('language_selection2')),
+          actions: <CupertinoActionSheetAction>[
+            CupertinoActionSheetAction(
+              isDefaultAction: true,
+              onPressed: () {
+                settings.changeLanguage("tr");
+                Navigator.pop(context);
+              },
+              child: const Text('Turkce'),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                settings.changeLanguage("en");
+                Navigator.pop(context);
+              },
+              child: const Text('English'),
+            ),
+            CupertinoActionSheetAction(
+              isDestructiveAction: true,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(AppLocalizations.of(context).getTranslate('cancel')),
+            ),
+          ],
+        ),
+      );
+    }
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: settings.state.darkMode
+              ? Colors.transparent
+              : screenColor.themeColor,
           title: Text(
             AppLocalizations.of(context).getTranslate('settings'),
           ),
@@ -116,21 +113,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 10,
               ),
               settingTile(
-                  colors: settings.state.darkMode
-                      ? screenColor.iconBackgroundDark
-                      : screenColor.iconBackgroundLight,
-                  function: _showActionSheet,
-                  icon: settings.state.darkMode
-                      ? Icon(Iconsax.moon)
-                      : Icon(Iconsax.sun_15),
-                  text: AppLocalizations.of(context).getTranslate('darkMode'),
-                  icon1: SwitcherButton(
-                    size: 45,
-                    value: settings.state.darkMode,
-                    onChange: (value) {
-                      settings.changeDarkMode(value);
+                colors: settings.state.darkMode
+                    ? screenColor.iconBackgroundDark
+                    : screenColor.iconBackgroundLight,
+                function: _showActionSheet,
+                icon: settings.state.darkMode
+                    ? Icon(Iconsax.moon)
+                    : Icon(Iconsax.sun_15),
+                text: AppLocalizations.of(context).getTranslate('darkMode'),
+                icon1: SwitcherButton(
+                  size: 45,
+                  value: settings.state.darkMode,
+                  onChange: (value) {
+                    settings.changeDarkMode(value);
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              settingTile(
+                function: _showActionSheet,
+                colors: settings.state.darkMode
+                    ? screenColor.iconBackgroundDark
+                    : screenColor.iconBackgroundLight,
+                icon: Icon(Iconsax.refresh),
+                text: AppLocalizations.of(context).getTranslate('update'),
+                icon1: InkWell(
+                    onTap: () {
+                      GoRouter.of(context).push("/update");
                     },
-                  )),
+                    child: Icon(Iconsax.refresh_circle5)),
+              ),
             ],
           ),
         ),

@@ -28,6 +28,8 @@
     "logout": "Oturumu Kapat",
     "logout_confirm": "Oturumunuzu Kapatmak istediğinizden emin misiniz ? ",
     "need_account" : "Hesabınız yok mu ?",
+    "yes": "Evet",
+    "no": "Hayır",
     "register_now":"Şimdi Kaydolun",
     "welcome":"Hoş geldiniz",
     "beach":"Sahil",
@@ -46,5 +48,7 @@
     "available_mail" :"Geçerli bir e-posta adresi giriniz.",
     "match_pass":"Şifreler eşleşmiyor.",
     "empty_pass":"Şifreler boş bırakılamaz.",
-    "changed_pass" : "Şifreniz Değişmiştir."
+    "changed_pass" : "Şifreniz Değişmiştir.",
+    "update": "Bilgilerinizi Güncelleyin"
+
 }

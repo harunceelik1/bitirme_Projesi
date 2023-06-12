@@ -5,6 +5,7 @@ class Themes {
   static ThemeData lightTheme = FlexThemeData.light(
     scheme: FlexScheme.brandBlue,
     appBarElevation: 0,
+    appBarBackground: Colors.transparent,
     appBarOpacity: 0,
 
     // background: Color(0xff114ba8),

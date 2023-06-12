@@ -2,6 +2,7 @@
 import 'package:bitirme_projesi/db/user.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:bitirme_projesi/widget/bottomSheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -32,6 +33,34 @@ class _CustomAppBarState extends State<CustomAppBar> {
     super.initState();
     settings = context.read<SettingsCubit>();
     isar = Provider.of<Isar>(context, listen: false);
+  }
+
+  askLogout() {
+    showDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text(AppLocalizations.of(context).getTranslate("logout")),
+        content:
+            Text(AppLocalizations.of(context).getTranslate("logout_confirm")),
+        actions: [
+          CupertinoDialogAction(
+            isDestructiveAction: true,
+            child: Text(AppLocalizations.of(context).getTranslate("yes")),
+            onPressed: () {
+              settings.userLogout();
+              Navigator.of(context).pop();
+              GoRouter.of(context).replace('/loginScreen');
+            },
+          ),
+          CupertinoDialogAction(
+            child: Text(AppLocalizations.of(context).getTranslate("no")),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -148,7 +177,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       child: IconButton(
                         splashColor: screenColor.transparent,
                         onPressed: () => {
-                          GoRouter.of(context).push('/loginScreen'),
+                          // GoRouter.of(context).push('/loginScreen'),
+                          askLogout()
                           // Navigator.pushNamed(context, '/loginScreen')
                         },
                         icon: Icon(Icons.close),

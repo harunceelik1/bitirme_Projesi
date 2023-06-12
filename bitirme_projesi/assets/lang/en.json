@@ -26,6 +26,8 @@
     "wrong" : "Wrong or Invalid email address or password.",
     "invalid_credentials" : "Wrong or Invalid email address or password.",
     "logout": "Logout",
+    "yes": "Yes",
+    "no": "No",
     "logout_confirm": "Are you sure you want to log out?",
     "need_account":"dont't have account ? ",
     "register_now":"Register Now",
@@ -46,6 +48,6 @@
     "available_mail": "Enter a valid email address.",
     "match_pass":"Passwords do not match.",
     "empty_pass":"Passwords cannot be left blank.",
-    "changed_pass" : "Password is changed."
-
+    "changed_pass" : "Password is changed.",
+    "update": "Update Information"
 }
