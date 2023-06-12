@@ -17,6 +17,7 @@ class bottomNavigation extends StatefulWidget {
     Key? key,
     required this.changeIndex,
   }) : super(key: key);
+
   int page = 0;
 
   @override
@@ -26,8 +27,6 @@ class bottomNavigation extends StatefulWidget {
 class _bottomNavigationState extends State<bottomNavigation> {
   @override
   Widget build(BuildContext context) {
-    // GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-
     return CurvedNavigationBar(
       index: widget.page,
       color: screenColor.unselectColor,
@@ -36,41 +35,10 @@ class _bottomNavigationState extends State<bottomNavigation> {
       items: [
         Icon(Icons.home),
         Icon(Icons.add),
-        InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Favories(),
-                ),
-              );
-            },
-            child: Icon(Iconsax.heart)),
+        Icon(Iconsax.heart),
       ],
       onTap: (index) {
-        switch (index) {
-          case 0:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-            );
-            break;
-          case 1:
-            // Add page
-            break;
-          case 2:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Favories(),
-              ),
-            );
-            break;
-          default:
-            break;
-        }
+        widget.changeIndex(index); // index değerini gönder
       },
     );
   }

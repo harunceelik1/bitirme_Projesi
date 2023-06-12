@@ -2,6 +2,9 @@ import 'dart:developer';
 import 'package:bitirme_projesi/bloc/settings_cubit.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../localizations/localizations.dart';
 
 class Categories extends StatefulWidget {
   Function filterTravel;
@@ -15,27 +18,39 @@ class _CategoriesState extends State<Categories> {
   List<String> tags = [];
   int tag = -1;
   late final SettingsCubit setting;
-  List<String> options = [
-    "Beach",
-    "Camp",
-    "Mountain",
-    "History",
-  ];
 
-  List<Map<String, dynamic>> categoriesList = [
-    {"id": 'Beach'},
-    {"id": 'Camp'},
-    {"id": 'Mountain'},
-    {"id": 'History'},
-  ];
   int selectItem = -1;
 
   bool beachSelected = false;
+  @override
+  void initState() {
+    setting = context.read<SettingsCubit>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    List<String> options = [
+      AppLocalizations.of(context).getTranslate("beach"),
+      AppLocalizations.of(context).getTranslate("camp"),
+      AppLocalizations.of(context).getTranslate("mountain"),
+      AppLocalizations.of(context).getTranslate("history"),
+    ];
+    List<Map<String, dynamic>> categoriesList = [
+      {"id": AppLocalizations.of(context).getTranslate("beach")},
+      {
+        "id": AppLocalizations.of(context).getTranslate("camp"),
+      },
+      {
+        "id": AppLocalizations.of(context).getTranslate("mountain"),
+      },
+      {
+        "id": AppLocalizations.of(context).getTranslate("history"),
+      },
+    ];
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -73,8 +88,12 @@ class _CategoriesState extends State<Categories> {
                         },
                         child: Card(
                           color: selectItem == index
-                              ? screenColor.themeColor
-                              : screenColor.unselectColor,
+                              ? setting.state.darkMode
+                                  ? Color.fromARGB(255, 52, 112, 161)
+                                  : screenColor.themeColor
+                              : setting.state.darkMode
+                                  ? Color.fromARGB(255, 44, 57, 73)
+                                  : Color.fromARGB(255, 149, 167, 199),
                           // ignore: sort_child_properties_last
                           child: SizedBox(
                             width: 90,
@@ -98,15 +117,6 @@ class _CategoriesState extends State<Categories> {
                     ),
                 itemCount: categoriesList.length),
           ),
-          // ChipsChoice<String>.multiple(
-          //   value: tags,
-          //   onChanged: (val) => setState(() => tags = val),
-          //   choiceItems: C2Choice.listFrom(
-          //     source: options,
-          //     value: (i, v) => v,
-          //     label: (i, v) => v,
-          //   ),
-          // ),
         ],
       ),
     );

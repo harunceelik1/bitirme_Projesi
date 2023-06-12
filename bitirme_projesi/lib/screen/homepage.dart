@@ -18,11 +18,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+int index = 0;
+
 class _HomePageState extends State<HomePage> {
   final title = "Where do you want to be ?";
   late Isar isar;
   late final SettingsCubit settings;
-  int index = 0;
 
   void indexAl(int index1) {
     print("indexAl");
@@ -72,9 +73,6 @@ class _HomePageState extends State<HomePage> {
         //       ),
         //     )),
         child: getScreenByIndex(index),
-      ),
-      bottomNavigationBar: bottomNavigation(
-        changeIndex: indexAl,
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:bitirme_projesi/widget/list.dart';
 import 'package:flutter/material.dart';
 
+import '../localizations/localizations.dart';
 import 'locations.dart';
 
 class InputSearch extends StatelessWidget {
@@ -12,7 +13,6 @@ class InputSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inputText = 'Search';
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
@@ -36,7 +36,8 @@ class InputSearch extends StatelessWidget {
 
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(2),
-                    hintText: inputText,
+                    hintText:
+                        AppLocalizations.of(context).getTranslate("search"),
                     hintStyle:
                         TextStyle(color: Colors.grey.shade700, fontSize: 14),
                     border: OutlineInputBorder(
@@ -48,10 +49,10 @@ class InputSearch extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
                         decoration: BoxDecoration(
-                            // color: Colors.red,
-                            border: Border(
-                                right:
-                                    BorderSide(color: Colors.grey.shade700))),
+                          // color: Colors.red,
+                          border: Border(
+                              right: BorderSide(color: Colors.grey.shade700)),
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: Image.asset("images/search16.png"),
@@ -67,7 +68,7 @@ class InputSearch extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Card(
-              color: Color.fromARGB(90, 72, 87, 250),
+              color: screenColor.themeColor,
               child: CircleAvatar(
                 backgroundColor: screenColor.transparent,
                 radius: 25,

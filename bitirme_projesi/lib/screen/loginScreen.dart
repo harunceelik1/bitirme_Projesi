@@ -12,6 +12,7 @@ import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/settings_cubit.dart';
+import '../localizations/localizations.dart';
 import '../storage/storage.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,8 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: snackDesign(
-            text1: "Dikkat ! ",
-            text2: "Lütfen bilgileri doldurunuz ! ",
+            text1: AppLocalizations.of(context).getTranslate("warning"),
+            text2: AppLocalizations.of(context).getTranslate("fill_Box"),
             colorSnack: screenColor.snackRed,
             image: Image.asset("images/danger.png"),
             image2: Image.asset("images/paint-splash.png"),
@@ -86,8 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: snackDesign(
-                text1: "Dikkat ! ",
-                text2: "Email ya da şifreniz hatalı",
+                text1: AppLocalizations.of(context).getTranslate("warning"),
+                text2: AppLocalizations.of(context)
+                    .getTranslate("email_and_password"),
                 colorSnack: screenColor.snackRed,
                 image: Image.asset("images/danger.png"),
                 image2: Image.asset("images/paint-splash.png"),
@@ -104,8 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: snackDesign(
-            text1: "Dikkat ! ",
-            text2: "Lütfen bilgilerinizi doldurunuz",
+            text1: AppLocalizations.of(context).getTranslate("warning"),
+            text2: AppLocalizations.of(context).getTranslate("fill_Box"),
             colorSnack: screenColor.snackRed,
             image: Image.asset("images/danger.png"),
             image2: Image.asset("images/paint-splash.png"),
@@ -169,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Text(
-                        "Login",
+                        AppLocalizations.of(context).getTranslate("login"),
                         style: GoogleFonts.roboto(
                             fontSize: 16, color: screenColor.white),
                       ),
@@ -183,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // ignore: prefer_const_constructors
               InputWidget(
                 icon: Iconsax.sms,
-                text: "Enter Email",
+                text: AppLocalizations.of(context).getTranslate("enter_email"),
                 obscureText: false,
                 showImage: false,
                 inputFormatters: [
@@ -200,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // ignore: prefer_const_constructors
               InputWidget(
                 icon: Iconsax.key,
-                text: "Password",
+                text: AppLocalizations.of(context).getTranslate("password"),
                 obscureText: true,
                 showImage: true,
                 inputFormatters: [
@@ -223,7 +225,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Navigator.of(context).pushNamed("/changePass");
                       GoRouter.of(context).pushNamed('changePass');
                     },
-                    child: Text("Forget Password ? ")),
+                    child: Text(
+                      AppLocalizations.of(context).getTranslate("forget_pass"),
+                    )),
               ),
               SizedBox(
                 height: 70,
@@ -256,7 +260,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     child: Text(
-                      "LOGIN",
+                      AppLocalizations.of(context).getTranslate("login"),
                       style: TextStyle(color: screenColor.white),
                     ),
                   ),
@@ -269,7 +273,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("dont't have account ? "),
+                    Text(
+                      AppLocalizations.of(context).getTranslate("need_account"),
+                    ),
                     GestureDetector(
                       onTap: (() {
                         // Navigator.of(context)
@@ -278,7 +284,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         GoRouter.of(context).push("/registerScreen");
                       }),
                       child: Text(
-                        "Register Now",
+                        AppLocalizations.of(context)
+                            .getTranslate("register_now"),
                         style: TextStyle(
                           color: Color(0xff058cc0),
                         ),

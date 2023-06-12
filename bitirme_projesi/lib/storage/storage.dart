@@ -5,13 +5,13 @@ class AppStorage {
     final SharedPreferences storage = await SharedPreferences.getInstance();
     var loggedIn = storage.getBool('isLoggedIn');
     var userInfo = storage.getStringList('userInfo');
-    // var language = storage.getString('language');
+    var language = storage.getString('language');
     var darkMode = storage.getBool('darkMode');
 
     return {
       "loggedIn": loggedIn,
       "userInfo": userInfo,
-      // "language": language,
+      "language": language,
       "darkMode": darkMode,
     };
   }

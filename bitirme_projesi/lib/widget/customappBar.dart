@@ -11,6 +11,7 @@ import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/settings_cubit.dart';
+import '../localizations/localizations.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   CustomAppBar({
@@ -78,7 +79,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "İsim : ${settings.state.userInfo[0]}",
+                          AppLocalizations.of(context).getTranslate("name") +
+                              " : ${settings.state.userInfo[0]}",
                           style: GoogleFonts.poppins(
                               fontSize: 18, color: screenColor.white),
                         )
@@ -92,7 +94,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Telefon No : ${settings.state.userInfo[3]}",
+                          AppLocalizations.of(context).getTranslate("phone") +
+                              " : ${settings.state.userInfo[3]}",
                           style: GoogleFonts.poppins(
                               fontSize: 18, color: screenColor.white),
                         )
@@ -107,7 +110,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundColor: screenColor.cardsColor,
+                      backgroundColor: settings.state.darkMode
+                          ? Color.fromARGB(27, 24, 43, 255)
+                          : Color.fromARGB(255, 52, 112, 161),
                       child: IconButton(
                         onPressed: () => {
                           GoRouter.of(context).push('/settings'),
@@ -121,7 +126,25 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     ),
                     CircleAvatar(
                       radius: 25,
-                      backgroundColor: screenColor.cardsColor,
+                      backgroundColor: settings.state.darkMode
+                          ? Color.fromARGB(27, 24, 43, 255)
+                          : Color.fromARGB(255, 52, 112, 161),
+                      child: IconButton(
+                        onPressed: () => {
+                          GoRouter.of(context).push('/favories'),
+                        },
+                        icon: Icon(Iconsax.heart),
+                        color: screenColor.white,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: settings.state.darkMode
+                          ? Color.fromARGB(27, 24, 43, 255)
+                          : Color.fromARGB(255, 52, 112, 161),
                       child: IconButton(
                         splashColor: screenColor.transparent,
                         onPressed: () => {

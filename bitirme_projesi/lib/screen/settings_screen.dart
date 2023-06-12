@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:switcher_button/switcher_button.dart';
-
-import '../bloc/settings_cubit.dart';
 import 'package:bitirme_projesi/model/Colors.dart';
+
+import '../../localizations/localizations.dart';
+import '../bloc/settings_cubit.dart';
 import '../model/padding.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -24,19 +25,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
         title: Text(
-            "    AppLocalizations.of(context).getTranslate('language_selection')"),
+            AppLocalizations.of(context).getTranslate('language_selection')),
         message: Text(
-            "AppLocalizations.of(context).getTranslate('language_selection2')"),
+            AppLocalizations.of(context).getTranslate('language_selection2')),
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
             isDefaultAction: true,
             onPressed: () {
+              settings.changeLanguage("tr");
               Navigator.pop(context);
             },
             child: const Text('Turkce'),
           ),
           CupertinoActionSheetAction(
             onPressed: () {
+              settings.changeLanguage("en");
               Navigator.pop(context);
             },
             child: const Text('English'),
@@ -46,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("AppLocalizations.of(context).getTranslate('cancel')"),
+            child: Text(AppLocalizations.of(context).getTranslate('cancel')),
           ),
         ],
       ),
@@ -66,8 +69,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title:
-              Text(" AppLocalizations.of(context).getTranslate('settings'),"),
+          title: Text(
+            AppLocalizations.of(context).getTranslate('settings'),
+          ),
         ),
         body: Padding(
           padding: MyPadding.vertical10,
@@ -85,8 +89,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       padding: MyPadding.all8,
                       child: Column(
                         children: [
-                          Text(
-                              "AppLocalizations.of(context).getTranslate('welcome')"),
+                          Text(AppLocalizations.of(context)
+                              .getTranslate('welcome')),
                           Text(
                             settings.state.userInfo[0],
                           ),
@@ -105,7 +109,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ? screenColor.iconBackgroundDark
                     : screenColor.iconBackgroundLight,
                 icon: Icon(Iconsax.global),
-                text: settings.state.userInfo[1],
+                text: AppLocalizations.of(context).getTranslate('language'),
                 icon1: Icon(Iconsax.arrow_circle_down),
               ),
               SizedBox(
@@ -119,7 +123,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   icon: settings.state.darkMode
                       ? Icon(Iconsax.moon)
                       : Icon(Iconsax.sun_15),
-                  text: settings.state.darkMode.toString(),
+                  text: AppLocalizations.of(context).getTranslate('darkMode'),
                   icon1: SwitcherButton(
                     size: 45,
                     value: settings.state.darkMode,

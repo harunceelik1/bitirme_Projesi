@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../bloc/settings_cubit.dart';
+import '../localizations/localizations.dart';
 import '../storage/storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -50,17 +51,17 @@ class _InitialScreenState extends State<InitialScreen> {
           var liste = defaultLocale.split('_');
           // ["en","US"]
           // ["tr", "TR"]
-          // var isSupported =
-          //     AppLocalizations.delegate.isSupported(Locale(liste[0], ""));
-          // if (isSupported) {
-          //   data["language"] = liste[0];
-          //   await storage.writeAppSettings(
-          //       language: data["language"], darkMode: data["darkMode"]);
-          // } else {
-          //   data["language"] = "en";
-          //   await storage.writeAppSettings(
-          //       language: data["language"], darkMode: data["darkMode"]);
-          // }
+          var isSupported =
+              AppLocalizations.delegate.isSupported(Locale(liste[0], ""));
+          if (isSupported) {
+            data["language"] = liste[0];
+            await storage.writeAppSettings(
+                language: data["language"], darkMode: data["darkMode"]);
+          } else {
+            data["language"] = "en";
+            await storage.writeAppSettings(
+                language: data["language"], darkMode: data["darkMode"]);
+          }
         }
       }
       if (data["loggedIn"] == null) {

@@ -37,7 +37,7 @@ class _InputWidgetState extends State<InputWidget> {
       padding: EdgeInsets.only(left: 20, right: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
-        color: Colors.grey.shade800.withOpacity(0.5),
+        color: Colors.grey.shade700.withOpacity(0.2),
       ),
       alignment: Alignment.center,
       child: TextField(
@@ -47,6 +47,8 @@ class _InputWidgetState extends State<InputWidget> {
         cursorColor: screenColor.grey,
         obscureText: widget.obscureText && !_gorunurluk,
         decoration: InputDecoration(
+          fillColor: screenColor.transparent,
+          hoverColor: screenColor.transparent,
           icon: Icon(
             widget.icon,
             color: screenColor.loginIcon,

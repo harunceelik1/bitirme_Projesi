@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
+import '../localizations/localizations.dart';
 import 'favories.dart';
 
 class HeroScreen extends StatefulWidget {
@@ -72,8 +73,8 @@ class _HeroScreenState extends State<HeroScreen> {
                                         Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(
-                                                builder: ((context) => HomePage(
-                                                    ))))
+                                                builder: ((context) =>
+                                                    HomePage())))
                                       },
                                       icon: Icon(Icons.arrow_back),
                                       color: screenColor.white,
@@ -168,14 +169,16 @@ class _HeroScreenState extends State<HeroScreen> {
                                   Text(
                                     widget.travel.location,
                                     style: TextStyle(
-                                        color: screenColor.grey, fontSize: 22),
+                                        color: screenColor.white, fontSize: 22),
                                   ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(widget.travel.name,
-                                          style: TextStyle(fontSize: 22)),
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              color: screenColor.white)),
                                       Row(
                                         children: [
                                           Container(
@@ -186,7 +189,10 @@ class _HeroScreenState extends State<HeroScreen> {
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: Icon(Iconsax.star5),
+                                                child: Icon(
+                                                  Iconsax.star5,
+                                                  color: screenColor.white,
+                                                ),
                                               )),
                                           SizedBox(
                                             width: 10,
@@ -194,7 +200,8 @@ class _HeroScreenState extends State<HeroScreen> {
                                           Column(
                                             children: [
                                               Text(
-                                                "Rating",
+                                                AppLocalizations.of(context)
+                                                    .getTranslate("ratings"),
                                                 style: TextStyle(
                                                     color: screenColor.grey),
                                               ),
@@ -221,16 +228,19 @@ class _HeroScreenState extends State<HeroScreen> {
                                     child: Container(
                                       width: width * 0.9,
                                       decoration: BoxDecoration(
-                                          color: screenColor.themeColor,
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
+                                        color: screenColor.themeColor,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(15.0),
                                         child: Center(
                                             child: Text(
-                                          "Choose Dates",
+                                          AppLocalizations.of(context)
+                                              .getTranslate("choose_dates"),
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold),
+                                            color: screenColor.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         )),
                                       ),
                                     ),
@@ -294,7 +304,8 @@ class _HeroScreenState extends State<HeroScreen> {
                           ),
                           deneme(
                             width: width,
-                            text: "Price From",
+                            text: AppLocalizations.of(context)
+                                .getTranslate("price"),
                             text2: widget.travel.price,
                             image: Image.asset("images/coins.png"),
                           ),
@@ -357,7 +368,7 @@ class deneme extends StatelessWidget {
                 children: [
                   Text(
                     text2,
-                    style: TextStyle(fontSize: 22),
+                    style: TextStyle(fontSize: 22, color: screenColor.white),
                   ),
                   image
                 ],

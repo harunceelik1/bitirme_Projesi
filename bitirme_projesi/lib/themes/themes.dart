@@ -4,6 +4,9 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 class Themes {
   static ThemeData lightTheme = FlexThemeData.light(
     scheme: FlexScheme.brandBlue,
+    appBarElevation: 0,
+    appBarOpacity: 0,
+
     // background: Color(0xff114ba8),
     // useMaterial3: true,
     // primary: const Color(0xff8315b5),

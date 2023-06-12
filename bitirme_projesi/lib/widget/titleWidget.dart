@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/settings_cubit.dart';
+import '../localizations/localizations.dart';
 
 class titleWidget extends StatefulWidget {
   titleWidget({
@@ -24,8 +25,6 @@ class _titleWidgetState extends State<titleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final title = "Where do you want to be ?";
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: LayoutBuilder(
@@ -42,7 +41,7 @@ class _titleWidgetState extends State<titleWidget> {
               ),
               Wrap(children: [
                 Text(
-                  title,
+                  AppLocalizations.of(context).getTranslate("title_text"),
                   style: Theme.of(context)
                       .textTheme
                       .headline5

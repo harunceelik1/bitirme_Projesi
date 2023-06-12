@@ -6,15 +6,30 @@ import 'package:bitirme_projesi/model/travel.dart';
 import 'package:bitirme_projesi/screen/favories.dart';
 import 'package:bitirme_projesi/screen/heroScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
-class Locations extends StatelessWidget {
+import '../bloc/settings_cubit.dart';
+
+class Locations extends StatefulWidget {
   final Travel travel;
-  Locations(
-    this.travel,
-  );
+
+  Locations(this.travel);
+
+  @override
+  State<Locations> createState() => _LocationsState();
+}
+
+class _LocationsState extends State<Locations> {
+  late final SettingsCubit settings;
+
+  @override
+  void initState() {
+    super.initState();
+    settings = context.read<SettingsCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +50,9 @@ class Locations extends StatelessWidget {
               height: 310,
               width: width * 0.8,
               decoration: BoxDecoration(
-                  color: screenColor.cardsColor,
+                  color: settings.state.darkMode
+                      ? Color.fromARGB(255, 57, 66, 80)
+                      : Color.fromARGB(255, 160, 193, 219),
                   borderRadius: BorderRadius.circular(20)),
               child: Column(
                 children: [
@@ -43,79 +60,78 @@ class Locations extends StatelessWidget {
                     padding: const EdgeInsets.all(15.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) => HeroScreen(
-                                  travel: travel,
-                                )),
+                            builder: (context) =>
+                                HeroScreen(travel: widget.travel),
                           ),
                         );
                       },
                       child: Hero(
-                        tag: travel.image,
+                        tag: widget.travel.image,
                         child: Container(
-                            height: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: new DecorationImage(
-                                  image: AssetImage(travel.image),
-                                  fit: BoxFit.cover),
-                            )),
+                          height: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: new DecorationImage(
+                                image: AssetImage(widget.travel.image),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(travel.name),
-                            Row(
-                              children: [
-                                Text(travel.rate),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  size: 14,
-                                  color: screenColor.themeColor,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              travel.icon,
-                              size: 14,
-                              color: screenColor.themeColor,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              travel.location,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2
-                                  ?.copyWith(
-                                      color: screenColor.grey,
-                                      fontWeight: FontWeight.w300),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(widget.travel.name),
+                              Row(
+                                children: [
+                                  Text(widget.travel.rate),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    size: 14,
+                                    color: screenColor.themeColor,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                widget.travel.icon,
+                                size: 14,
+                                color: screenColor.themeColor,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                widget.travel.location,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2
+                                    ?.copyWith(fontWeight: FontWeight.w300),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -126,16 +142,16 @@ class Locations extends StatelessWidget {
               child: Center(
                 child: Consumer<TravelProvider>(
                   builder: (context, travelProvider, _) {
-                    final isFavorite = travelProvider.isFavorite(travel);
+                    final isFavorite = travelProvider.isFavorite(widget.travel);
                     return CircleAvatar(
                       backgroundColor: screenColor.themeColor,
                       radius: circleYukseklik / 2,
                       child: IconButton(
                         onPressed: () {
                           if (isFavorite) {
-                            travelProvider.removeFavorite(travel);
+                            travelProvider.removeFavorite(widget.travel);
                           } else {
-                            travelProvider.addFavorite(travel);
+                            travelProvider.addFavorite(widget.travel);
                           }
                         },
                         icon: Icon(

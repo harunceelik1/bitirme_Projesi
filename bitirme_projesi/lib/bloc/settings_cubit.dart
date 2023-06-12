@@ -7,24 +7,24 @@ import '../storage/storage.dart';
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit(super.initialState);
 
-  // changeLanguage(String lang) async {
-  //   final newState = SettingsState(
-  //     language: lang,
-  //     darkMode: state.darkMode,
-  //     userInfo: state.userInfo,
-  //     userLoggedIn: state
-  //         .userLoggedIn, //durum güncelliyoruz fakat state olanlar değişmiyor.
-  //   );
+  changeLanguage(String lang) async {
+    final newState = SettingsState(
+      language: lang,
+      darkMode: state.darkMode,
+      userInfo: state.userInfo,
+      userLoggedIn: state
+          .userLoggedIn, //durum güncelliyoruz fakat state olanlar değişmiyor.
+    );
 
-  //   emit(newState); //bu emit kaydeidot setState gibi
+    emit(newState); //bu emit kaydeidot setState gibi
 
-  //   final storage = AppStorage();
-  //   await storage.writeAppSettings(
-  //     darkMode: state.darkMode,
-  //     language: lang,
-  //   );
-  //   //burada hafızaya yazıyoruz.
-  // }
+    final storage = AppStorage();
+    await storage.writeAppSettings(
+      darkMode: state.darkMode,
+      language: lang,
+    );
+    //burada hafızaya yazıyoruz.
+  }
 
   changeDarkMode(bool darkMode) async {
     final newState = SettingsState(

@@ -9,6 +9,8 @@ import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../localizations/localizations.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -33,8 +35,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: snackDesign(
-            text1: "Dikkat ! ",
-            text2: "Lütfen bilgileri doldurunuz ! ",
+            text1: AppLocalizations.of(context).getTranslate("warning"),
+            text2: AppLocalizations.of(context).getTranslate("fill_Box"),
             colorSnack: screenColor.snackRed,
             image: Image.asset("images/danger.png"),
             image2: Image.asset("images/paint-splash.png"),
@@ -70,7 +72,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: snackDesign(
-                text1: "Kişi Eklenmiştir !",
+                text1: AppLocalizations.of(context)
+                    .getTranslate("succesful_register"),
                 text2: "",
                 colorSnack: screenColor.snackGreen,
                 image: Image.asset("images/ok.png"),
@@ -100,6 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 50,
+        iconTheme: IconThemeData(color: screenColor.black),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -137,7 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Text(
-                        "Register",
+                        AppLocalizations.of(context).getTranslate("register"),
                         style: GoogleFonts.roboto(
                             fontSize: 16, color: screenColor.white),
                       ),
@@ -150,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               InputWidget(
                 icon: Iconsax.user,
-                text: "Full Name",
+                text: AppLocalizations.of(context).getTranslate("name"),
                 obscureText: false,
                 showImage: false,
                 onChanged: (value) {
@@ -162,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               InputWidget(
                 icon: Iconsax.sms,
-                text: "Enter Email",
+                text: AppLocalizations.of(context).getTranslate("enter_email"),
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(20),
                   FilteringTextInputFormatter.singleLineFormatter,
@@ -178,7 +182,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               InputWidget(
                 icon: Iconsax.call,
-                text: "Phone Number",
+                text: AppLocalizations.of(context).getTranslate("phone"),
                 obscureText: false,
                 showImage: false,
                 inputFormatters: [
@@ -195,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               InputWidget(
                 icon: Iconsax.key,
-                text: "Password",
+                text: AppLocalizations.of(context).getTranslate("password"),
                 obscureText: true,
                 showImage: true,
                 inputFormatters: [
@@ -236,7 +240,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     child: Text(
-                      "REGISTER",
+                      AppLocalizations.of(context).getTranslate("register"),
                       style: GoogleFonts.roboto(
                           fontSize: 16, color: screenColor.white),
                     ),

@@ -75,7 +75,7 @@ class _mobileScreenState extends State<mobileScreen> {
         ),
         InputSearch(filterTravel),
         SizedBox(
-          height: 15,
+          height: 25,
         ),
         // Kategoriler kısmı. Listview ile yapıldı
         Categories(
@@ -91,7 +91,6 @@ class _mobileScreenState extends State<mobileScreen> {
                 child: Text(
                   "Bulunamadı",
                   style: TextStyle(
-                    color: screenColor.white,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),

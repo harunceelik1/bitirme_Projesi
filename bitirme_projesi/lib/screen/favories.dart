@@ -5,6 +5,7 @@ import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 
 import '../db/user.dart';
+import '../localizations/localizations.dart';
 import '../model/travel.dart';
 
 import 'package:flutter/material.dart';
@@ -21,10 +22,10 @@ class Favories extends StatefulWidget {
   State<Favories> createState() => _FavoriesState();
 }
 
+int index = 0;
+
 class TravelProvider extends ChangeNotifier {
   List<Travel> favoriler = []; // Favori konumları tutan liste
-  int index = 0;
-
   void indexAl(int index1) {
     print("indexAl");
     print(index1);
@@ -52,6 +53,17 @@ class TravelProvider extends ChangeNotifier {
 }
 
 class _FavoriesState extends State<Favories> {
+  int index = 0;
+
+  void indexAl(int index1) {
+    print("indexAl");
+    print(index1);
+
+    setState(() {
+      index = index1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final travelProvider = Provider.of<TravelProvider>(context);
@@ -59,8 +71,7 @@ class _FavoriesState extends State<Favories> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favorilere Ekle'),
-      ),
+          title: Text(AppLocalizations.of(context).getTranslate("favorites"))),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: ListView.builder(
@@ -72,55 +83,54 @@ class _FavoriesState extends State<Favories> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: ListTile(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    favoriKonum.image,
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                title: Text(
-                  favoriKonum.name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(favoriKonum.rate),
-                        SizedBox(width: 5),
-                        Icon(
-                          Iconsax.star,
-                          size: 14,
-                          color: screenColor.themeColor,
-                        ),
-                      ],
+              child: Center(
+                child: ListTile(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      favoriKonum.image,
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.cover,
                     ),
-                    Text(favoriKonum.location),
-                  ],
-                ),
-                trailing: IconButton(
-                  icon: Icon(
-                    Iconsax.trash,
                   ),
-                  onPressed: () {
-                    travelProvider.removeFavorite(favoriKonum);
-                  },
+                  title: Text(
+                    favoriKonum.name,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(favoriKonum.rate),
+                          SizedBox(width: 5),
+                          Icon(
+                            Iconsax.star,
+                            size: 14,
+                            color: screenColor.themeColor,
+                          ),
+                        ],
+                      ),
+                      Text(favoriKonum.location),
+                    ],
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(
+                      Iconsax.trash,
+                    ),
+                    onPressed: () {
+                      travelProvider.removeFavorite(favoriKonum);
+                    },
+                  ),
                 ),
               ),
             );
           },
         ),
-      ),
-      bottomNavigationBar: bottomNavigation(
-        changeIndex: indexAl,
       ),
     );
   }

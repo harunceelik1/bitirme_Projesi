@@ -8,6 +8,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 
+import '../localizations/localizations.dart';
 import '../widget/snackDesign.dart';
 
 class ChangePass extends StatefulWidget {
@@ -56,7 +57,8 @@ class _ChangePassState extends State<ChangePass> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: snackDesign(
-                text1: "Şifreniz Değişmiştir. ",
+                text1:
+                    AppLocalizations.of(context).getTranslate("changed_pass"),
                 text2: "",
                 colorSnack: screenColor.snackGreen,
                 image: Image.asset("images/ok.png"),
@@ -71,8 +73,8 @@ class _ChangePassState extends State<ChangePass> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: snackDesign(
-                text1: "Dikkat !",
-                text2: "Şifre boş bırakılamaz.",
+                text1: AppLocalizations.of(context).getTranslate("warning"),
+                text2: AppLocalizations.of(context).getTranslate("empty_pass"),
                 colorSnack: screenColor.snackRed,
                 image: Image.asset("images/danger.png"),
                 image2: Image.asset("images/paint-splash.png"),
@@ -87,8 +89,8 @@ class _ChangePassState extends State<ChangePass> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: snackDesign(
-              text1: "Dikkat !",
-              text2: "Şifreler eşleşmiyor.",
+              text1: AppLocalizations.of(context).getTranslate("warning"),
+              text2: AppLocalizations.of(context).getTranslate("match_pass"),
               colorSnack: screenColor.snackRed,
               image: Image.asset("images/danger.png"),
               image2: Image.asset("images/paint-splash.png"),
@@ -103,8 +105,8 @@ class _ChangePassState extends State<ChangePass> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: snackDesign(
-            text1: "Dikkat !",
-            text2: "Geçerli bir e-posta adresi giriniz.",
+            text1: AppLocalizations.of(context).getTranslate("warning"),
+            text2: AppLocalizations.of(context).getTranslate("available_mail"),
             colorSnack: screenColor.snackRed,
             image: Image.asset("images/danger.png"),
             image2: Image.asset("images/paint-splash.png"),
@@ -118,8 +120,8 @@ class _ChangePassState extends State<ChangePass> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: snackDesign(
-            text1: "Dikkat !",
-            text2: "E-posta adresi boş bırakılamaz.",
+            text1: AppLocalizations.of(context).getTranslate("warning"),
+            text2: AppLocalizations.of(context).getTranslate("mail_required"),
             colorSnack: screenColor.snackRed,
             image: Image.asset("images/danger.png"),
             image2: Image.asset("images/paint-splash.png"),
@@ -181,7 +183,8 @@ class _ChangePassState extends State<ChangePass> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Text(
-                        "Change Password",
+                        AppLocalizations.of(context)
+                            .getTranslate("change_pass"),
                         style: GoogleFonts.roboto(
                             fontSize: 16, color: screenColor.white),
                       ),
@@ -194,7 +197,7 @@ class _ChangePassState extends State<ChangePass> {
               ),
               InputWidget(
                 icon: Iconsax.sms,
-                text: "Enter Email",
+                text: AppLocalizations.of(context).getTranslate("enter_email"),
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(20),
                   FilteringTextInputFormatter.singleLineFormatter,
@@ -210,7 +213,7 @@ class _ChangePassState extends State<ChangePass> {
               ),
               InputWidget(
                 icon: Iconsax.key,
-                text: "Password",
+                text: AppLocalizations.of(context).getTranslate("password"),
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(20),
                   FilteringTextInputFormatter.singleLineFormatter,
@@ -226,7 +229,8 @@ class _ChangePassState extends State<ChangePass> {
               ),
               InputWidget(
                 icon: Iconsax.key,
-                text: "Confirm Password",
+                text: AppLocalizations.of(context)
+                    .getTranslate("confirm_password"),
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(20),
                   FilteringTextInputFormatter.singleLineFormatter,
@@ -268,7 +272,8 @@ class _ChangePassState extends State<ChangePass> {
                       ),
                     ),
                     child: Text(
-                      "UPDATE PASSWORD",
+                      AppLocalizations.of(context)
+                          .getTranslate("update_password"),
                       style: GoogleFonts.roboto(
                           fontSize: 16, color: screenColor.white),
                     ),
