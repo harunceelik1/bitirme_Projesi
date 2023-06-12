@@ -84,7 +84,7 @@ class _InitialScreenState extends State<InitialScreen> {
       if (data["loggedIn"]) {
         GoRouter.of(context).replace("/homePage");
       } else {
-        GoRouter.of(context).replace("/loginScreen");
+        GoRouter.of(context).replace("/logoinit");
       }
     } catch (e) {}
   }

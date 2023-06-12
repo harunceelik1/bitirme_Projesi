@@ -174,6 +174,9 @@ class _UpdateInfoState extends State<UpdateInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: settings.state.darkMode
+            ? Colors.transparent
+            : screenColor.themeColor,
         elevation: 0,
         toolbarHeight: 50,
       ),

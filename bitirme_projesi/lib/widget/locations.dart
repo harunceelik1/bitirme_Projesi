@@ -143,7 +143,10 @@ class _LocationsState extends State<Locations> {
                 child: Consumer<TravelProvider>(
                   builder: (context, travelProvider, _) {
                     final isFavorite = travelProvider.isFavorite(
-                        settings.state.userInfo[4], widget.travel);
+                        settings.state.userInfo.length >= 5
+                            ? settings.state.userInfo[4]
+                            : '',
+                        widget.travel);
                     return CircleAvatar(
                       backgroundColor: screenColor.themeColor,
                       radius: circleYukseklik / 2,
@@ -151,12 +154,17 @@ class _LocationsState extends State<Locations> {
                         onPressed: () {
                           if (isFavorite) {
                             travelProvider.removeFavorite(
-                              settings.state.userInfo[4],
+                              settings.state.userInfo.length >= 5
+                                  ? settings.state.userInfo[4]
+                                  : '',
                               widget.travel,
                             );
                           } else {
                             travelProvider.addFavorite(
-                                settings.state.userInfo[4], widget.travel);
+                                settings.state.userInfo.length >= 5
+                                    ? settings.state.userInfo[4]
+                                    : '',
+                                widget.travel);
                           }
                         },
                         icon: Icon(

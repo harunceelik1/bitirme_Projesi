@@ -92,14 +92,14 @@ class _FavoriesState extends State<Favories> {
             return Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Center(
                 child: ListTile(
                   contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       favoriKonum.image,
                       width: 80,
@@ -109,7 +109,7 @@ class _FavoriesState extends State<Favories> {
                   ),
                   title: Text(
                     favoriKonum.name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   subtitle: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -117,21 +117,24 @@ class _FavoriesState extends State<Favories> {
                     children: [
                       Row(
                         children: [
-                          Text(favoriKonum.rate),
+                          Text(favoriKonum.rate,
+                              style: TextStyle(fontSize: 14)),
                           SizedBox(width: 5),
                           Icon(
                             Iconsax.star,
-                            size: 14,
+                            size: 16,
                             color: screenColor.themeColor,
                           ),
                         ],
                       ),
-                      Text(favoriKonum.location),
+                      Text(favoriKonum.location,
+                          style: TextStyle(fontSize: 14)),
                     ],
                   ),
                   trailing: IconButton(
                     icon: Icon(
                       Iconsax.trash,
+                      size: 24,
                     ),
                     onPressed: () {
                       travelProvider.removeFavorite(userId, favoriKonum);
